@@ -1,29 +1,3 @@
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-.logo a img{
-    width: 40px;
-    height: 40px;
-}
-.first_nav{
-    background: rgb(0, 0, 0);
-}
-.nav-item a{
-    color: #fff;
-    font-weight: 100;
-}
-.nav-item a:hover{
-    color: #fff;
-}
-.inscription a{
-    background: #fff;
-    color: #000;
-    font-weight: bolder;
-    padding: auto 70px;
-    border-radius: 16px;
-}
 .imUber img{
     width: 500px;
     height: 500px;

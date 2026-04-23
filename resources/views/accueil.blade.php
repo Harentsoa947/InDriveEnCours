@@ -5,7 +5,7 @@
 @section('content')
 <div class="container" style="margin: 60px auto;">
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-6 d-flex justify-content-center justify-content-lg-start">
             <div class="ajuste">
                 <div class="d-flex gap-3">
                     <!-- Appelle au fonction javascript pour définir le lieu auto -->
@@ -50,7 +50,7 @@
             </div>
             
         </div>
-        <div class="col-lg-6 imUber">
+        <div class="col-lg-6 imUber d-none d-lg-block">
             <img src="{{ asset('images/imageUber.jpg') }}" alt="imageUber">
         </div>
     </div>

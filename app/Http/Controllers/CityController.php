@@ -13,13 +13,6 @@ class CityController extends Controller
         $ville = $req->query('q');
         $bbox = "46.6,-19.5,48.5,-17.5";
 
-        // Appel à l'API Photon depuis le serveur
-        // $response = Http::get('https://photon.komoot.io/api/', [
-        //     'q' => $ville,
-        //     'bbox' => $bbox,
-        //     'limit' => 10
-        // ]);
-
         // Ajoute "withoutVerifying()" juste avant le "get()"
         $response = Http::withoutVerifying()->get('https://photon.komoot.io/api/', [
             'q' => $ville,
@@ -32,4 +25,7 @@ class CityController extends Controller
         }
         return response()->json(['error' => 'Erreur API'], 500);
     }
+
+    
+
 }

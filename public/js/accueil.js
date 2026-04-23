@@ -20,7 +20,7 @@ function demarrage(e, id){
     }, 300)
     
 }
-
+// API Photon
 async function rechercheVille(ville, id){
     const loader = (id === '#dep') ? '.loader1' : '.loader2'
     document.querySelector(loader).style.display = 'block'

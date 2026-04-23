@@ -9,4 +9,8 @@ class GlobalController extends Controller
     public function accueil(){
         return view('accueil');
     }
+    public function choix_trajet()
+    {
+        return view('choix_trajet');
+    }
 }
