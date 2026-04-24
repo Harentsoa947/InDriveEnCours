@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LocalisationChauffeur;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -26,6 +27,11 @@ class CityController extends Controller
         return response()->json(['error' => 'Erreur API'], 500);
     }
 
-    
+    public function point_chauffeur()
+    {
+        $chauffeurs = LocalisationChauffeur::all();
+        // dd(response()->json($chauffeurs));
+        return response()->json($chauffeurs);
+    }
 
 }

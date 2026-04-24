@@ -10,6 +10,7 @@ Route::get('/', function () {
 
 // Appelle API Laravel + JavaScript
 Route::get('/villes/recherche', [CityController::class, 'recherche_ville']);
+Route::get('/point/chauffeur', [CityController::class, 'point_chauffeur']);
 
 Route::get('accueil', [GlobalController::class, 'accueil'])->name('accueil');
 Route::get('choix_trajet', [GlobalController::class, 'choix_trajet'])->name('choix_trajet');
