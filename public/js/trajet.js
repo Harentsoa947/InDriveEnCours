@@ -391,12 +391,8 @@ function affichageMap(lat, lng){
             console.log(d.nomChauf);
             chauffeur(map, d.latChauf, d.lonChauf, d.nomChauf)
         })
-        console.log(data);
     })
-    // let chauffeurBase = `/point/chauffeur`
-    // console.log(chauffeurBase);
-    // chauffeur(map, -18.91001220045104, 47.5255809)
-
+    
 }
 
 function calculDistance(lat1, lon1, lat2, lon2){
