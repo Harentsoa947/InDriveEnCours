@@ -25,6 +25,7 @@
     <title>@yield('title')</title>
 </head>
 <body>
+    @include('layouts.navbar')
     @yield('content')
     
     @if (request()->routeIs('accueil'))

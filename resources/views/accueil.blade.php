@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@include('layouts.navbar')
+
 @section('title', 'InDrive Accueil')
 
 @section('content')

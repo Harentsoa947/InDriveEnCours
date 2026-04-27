@@ -1,5 +1,5 @@
 @extends('layouts.master')
-@extends('layouts.navbar')
+
 
 @section('title', 'choix_trajet')
 
