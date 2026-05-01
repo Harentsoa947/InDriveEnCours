@@ -9,6 +9,8 @@ let pointB = {
     lng: null
 };
 
+document.querySelector('#fond').style.visibility = 'visible'
+console.log("Etat initial");
 
 var markerDest, routeLayer
 let timeout, marker
@@ -30,6 +32,12 @@ function affichageMap(lat, lng){
         zoomDelta: 0.25,
         zoomSnap: 0
     }).setView([lat, lng], 16)
+
+    // fin du chargement
+    map.whenReady(function(){
+        console.log("I wanna smoke moly");
+        document.querySelector('#fond').style.visibility = 'hidden'
+    })
 
     // Tuiles
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
