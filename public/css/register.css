@@ -1,0 +1,79 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* background: #e60e0e7c; */
+}
+html, body{
+    height: 100%;
+    margin: 0;
+}
+body{
+    background: linear-gradient(135deg, #f5f7fa 0%, #ffffff 100%);
+    background-attachment: fixed;
+    position: relative;
+}
+.im img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.logo img{
+    width: 30px;
+    height: 30px;
+}
+.wrapper {
+    position: absolute;
+    top: 15%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 600px;
+    perspective: 1500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.box{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    backface-visibility: hidden;
+    transition: transform 1.2s ease-in;
+    background: #fff;
+    box-shadow: 2px 6px 15px 12px #728f2c;
+    width: 70%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 30px;
+}
+.box .row {
+    height: 100%;
+    margin: 0;
+}
+/* Position initiale */
+.el1 { 
+    transform: rotateY(0deg); 
+    z-index: 2; 
+}
+
+.el2 { 
+    transform: rotateY(180deg); 
+    display: block !important; 
+    z-index: 1;
+}
+
+/* Classes de bascule */
+.rotate-to-auth .el1 { transform: rotateY(-180deg); }
+.rotate-to-auth .el2 { transform: rotateY(0deg); z-index: 3; }
+.text{
+    padding: 50px 0;
+}
+form input{
+    margin: 10px 0;
+}
+.inscri{
+    height: 50px !important;
+}

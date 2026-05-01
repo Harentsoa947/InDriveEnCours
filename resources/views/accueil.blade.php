@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'InDrive Accueil')
+@section('title', 'InDrive')
 
 @section('content')
 <div class="container" style="margin: 60px auto;">

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg first_nav">
     <div class="container logo">
-      <a class="navbar-brand" href="index.html" style="color: #fff;">
+      <a class="navbar-brand" href="{{ route('accueil') }}" style="color: #fff;">
         <img src="images/indrive-icon-logo.png" alt="Logo de InDrive">
         InDrive
       </a>
@@ -26,7 +26,7 @@
                 <a class="nav-link"href="#">Connexion</a>
             </li>
             <li class="nav-item inscription ms-3">
-                <a class="nav-link"href="#">S'inscrire</a>
+                <a class="nav-link"href="#" id="inscript">S'inscrire</a>
             </li>
         </ul>
       </div>

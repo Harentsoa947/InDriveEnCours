@@ -13,4 +13,8 @@ class GlobalController extends Controller
     {
         return view('choix_trajet');
     }
+    public function register()
+    {
+        return view('register.register');
+    }
 }

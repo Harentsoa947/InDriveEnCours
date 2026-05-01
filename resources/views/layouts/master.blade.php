@@ -17,6 +17,9 @@
     @if (request()->routeIs('accueil'))
         <link rel="stylesheet" href="{{ asset('css/accueil.css') }}">
     @endif
+    @if (request()->routeIs('register'))
+    <link rel="stylesheet" href="{{ asset('css/register.css') }}">
+    @endif
     
     <link rel="shortcut icon" href="{{ asset('images/indrive-icon-logo.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -43,5 +46,10 @@
         <script src="{{ asset('js/trajet.js') }}"></script>    
     @endif
     
+
+    @if (request()->routeIs('register'))
+        <script src="{{ asset('js/regiser.js') }}"></script>
+    @endif
+
 </body>
 </html>

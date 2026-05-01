@@ -24,3 +24,11 @@
     padding: auto 70px;
     border-radius: 16px;
 }
+#inscript:hover{
+    background: rgb(190, 235, 49);
+    color: #000;
+}
+nav{
+   position: relative; 
+   z-index: 9999;
+}

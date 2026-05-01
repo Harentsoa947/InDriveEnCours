@@ -14,6 +14,7 @@ Route::get('/point/chauffeur', [CityController::class, 'point_chauffeur']);
 
 Route::get('/', [GlobalController::class, 'accueil'])->name('accueil');
 Route::get('choix_trajet', [GlobalController::class, 'choix_trajet'])->name('choix_trajet');
+Route::get('register', [GlobalController::class, 'register'])->name('register');
 
 // 👤 users table :
 // role (client / chauffeur / admin)

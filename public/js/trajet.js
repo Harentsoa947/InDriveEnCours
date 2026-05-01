@@ -35,14 +35,13 @@ function affichageMap(lat, lng){
 
     // fin du chargement
     map.whenReady(function(){
-        console.log("I wanna smoke moly");
         document.querySelector('#fond').style.visibility = 'hidden'
     })
 
     // Tuiles
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19,
-        attribution: '&copy; OpenStreetMap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        // attribution: '&copy; OpenStreetMap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         updateWhenIdle: true,    // Attend que l'utilisateur arrête de bouger pour charger
         keepBuffer: 2,           // Garde en mémoire les tuiles autour pour un mouvement fluide
         className: 'map-tiles'   // Permet d'ajouter des transitions CSS si tu veux
