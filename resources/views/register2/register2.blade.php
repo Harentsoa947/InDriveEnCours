@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
-@section('title', 'Inscription')
+@section('title', 'Connexion/Inscription')
 
 @section('content')
 
 <div class="wrapper">
     <div class="container">
-        <div class="box el1" >
+        <div class="box el1">
             <div class="row">
                 <div class="col-lg-6 text ">
                     <div class="logo px-4">
@@ -22,9 +22,14 @@
                         <input type="email" class="form-control" placeholder="Email">
                         <input type="password" class="form-control" placeholder="Mots de passe">
                         <input type="password" class="form-control" placeholder="Vérifier mots de passe">
-                        <div class="text-end mt-3">
+                        <select name="" id="" class="form-control">
+                            <option value="" style="color: grey">---Passagier ou Chauffeur---</option>
+                            <option value="Passagier">Passagier</option>
+                            <option value="chauf">Chauffeur</option>
+                        </select>
+                        {{-- <div class="text-end mt-3">
                             <a href="" style="text-decoration: none; color: #000;" class="ms-auto text-end">Etes vous chauffeur?</a>
-                        </div>
+                        </div> --}}
                         
                         <input type="submit" value="S'inscrire" class="btn btn-dark w-50 d-block mx-auto inscri my-4">
                         <p>Déja une compte? <a href="" class="conn">Se connecter</a></p>
@@ -35,7 +40,7 @@
                 </div>
             </div>
         </div>
-        <div class="box el2" style="display: none;">
+        <div class="box el2">
             <div class="row">
                 <div class="col-lg-6 im p-0">
                     <img src="images/paul-hanaoka-D-qq7W751vs-unsplash.jpg" alt="">
@@ -51,9 +56,14 @@
                     <form action="" method="post" class="pe-4">
                         <input type="text" class="form-control" placeholder="Nom">
                         <input type="password" class="form-control" placeholder="Mots de passe">
-                        <div class="text-end mt-3">
+                        <select name="" id="" class="form-control">
+                            <option value="" style="color: grey">---Passagier ou Chauffeur---</option>
+                            <option value="Passagier">Passagier</option>
+                            <option value="chauf">Chauffeur</option>
+                        </select>
+                        {{-- <div class="text-end mt-3">
                             <a href="" style="text-decoration: none; color: #000;" class="ms-auto text-end">Etes vous chauffeur?</a>
-                        </div>
+                        </div> --}}
                         
                         <input type="submit" value="Se connecter" class="btn btn-dark w-50 d-block mx-auto inscri my-4">
                         <p class="insc">

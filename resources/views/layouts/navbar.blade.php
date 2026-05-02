@@ -22,11 +22,11 @@
           
         </ul>
         <ul class="navbar-nav mb-2 mb-lg-0">
-            <li class="nav-item">
-                <a class="nav-link"href="#">Connexion</a>
-            </li>
+            {{-- <li class="nav-item">
+                <a class="nav-link" href="{{ route('register') }}">Connexion</a>
+            </li> --}}
             <li class="nav-item inscription ms-3">
-                <a class="nav-link"href="#" id="inscript">S'inscrire</a>
+                <a class="nav-link" href="{{ route('register2') }}" id="inscript">Se connecter</a>
             </li>
         </ul>
       </div>

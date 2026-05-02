@@ -41,6 +41,15 @@
     color: #fff;
     border-radius: 10px;
 }
+/* temporaire, attente authentification */
+.reserver a{
+    padding: 10px 30px;
+    border: none;
+    background: #000;
+    color: #fff !important;
+    cursor: pointer;
+    border-radius: 10px;
+}
 .trace{
     width: 1.8px;
     height: 53px;

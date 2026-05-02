@@ -55,19 +55,19 @@ body{
 }
 /* Position initiale */
 .el1 { 
-    transform: rotateY(0deg); 
-    z-index: 2; 
+    transform: rotateY(-180deg); 
+    z-index: 1; 
 }
 
 .el2 { 
-    transform: rotateY(180deg); 
-    display: block !important; 
-    z-index: 1;
+    transform: rotateY(0deg); 
+    /* display: block !important;  */
+    z-index: 2;
 }
 
 /* Classes de bascule */
-.rotate-to-auth .el1 { transform: rotateY(-180deg); }
-.rotate-to-auth .el2 { transform: rotateY(0deg); z-index: 3; }
+.rotate-to-auth .el1 { transform: rotateY(0deg); z-index: 3;}
+.rotate-to-auth .el2 { transform: rotateY(180deg); z-index: 1; }
 .text{
     padding: 50px 0;
 }

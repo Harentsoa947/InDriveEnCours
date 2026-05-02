@@ -13,8 +13,17 @@ class GlobalController extends Controller
     {
         return view('choix_trajet');
     }
-    public function register()
+    public function register2()
     {
-        return view('register.register');
+        return view('register2.register2');
+    }
+    public function connexion()
+    {
+        return view('register.login');
+    }
+    // Attente de l'authentification utilisateur
+    public function reservation()
+    {
+        return view('choix_trajet');
     }
 }
