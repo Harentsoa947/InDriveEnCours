@@ -26,7 +26,7 @@
                 <a class="nav-link" href="{{ route('register') }}">Connexion</a>
             </li> --}}
             <li class="nav-item inscription ms-3">
-                <a class="nav-link" href="{{ route('register2') }}" id="inscript">Se connecter</a>
+                <a class="nav-link" href="{{ route('register') }}" id="inscript">Se connecter</a>
             </li>
         </ul>
       </div>

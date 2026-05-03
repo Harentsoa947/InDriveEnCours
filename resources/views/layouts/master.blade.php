@@ -17,7 +17,7 @@
     @if (request()->routeIs('accueil'))
         <link rel="stylesheet" href="{{ asset('css/accueil.css') }}">
     @endif
-    @if (request()->routeIs('register2'))
+    @if (request()->routeIs('register'))
     <link rel="stylesheet" href="{{ asset('css/register.css') }}">
     @endif
     
@@ -47,7 +47,7 @@
     @endif
     
 
-    @if (request()->routeIs('register2'))
+    @if (request()->routeIs('register'))
         <script src="{{ asset('js/regiser.js') }}"></script>
     @endif
 

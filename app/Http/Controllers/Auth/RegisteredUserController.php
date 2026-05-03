@@ -34,7 +34,7 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:25', 'min:5'],
             // 'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'numero_phone' => ['required'],
-            'role' => ['string'],
+            'role' => ['required', 'string'],
             'password' => ['required', 'confirmed'],
             // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ], [
@@ -42,14 +42,15 @@ class RegisteredUserController extends Controller
             'name.string' => 'Votre nom n\'est pas valide',
             'name.max' => 'Votre nom est trop long',
             'name.min' => 'Votre nom est trop court',
+            'role.required' => 'Vous devez avoir une rôle',
             // 'email.required' => 'Champ email obligatoire',
-            'password.required' => 'Créer votre mots de mots de passe',
+            'password.required' => 'Créer votre propre de mots de passe',
             'password.confirmed' => 'Le mots de passe est différent'
         ]);
 
         $user = User::create([
             'name' => $request->name,
-            'email' => $request->email,
+            'email' => $request->email ?? null,
             'numero_phone' => $request->numero_phone,
             'role' => $request->role,
             'password' => Hash::make($request->password),
