@@ -28,8 +28,18 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'email'],
+            // 'email' => ['required', 'string', 'email'],
+            'name' => ['required', 'string'],
             'password' => ['required', 'string'],
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'name.required' => 'Veuillez entrer votre nom pour vous connecter.',
+            'name.string'   => 'Le format du nom est invalide.',
+            'password.required' => 'Le mot de passe est obligatoire.',
         ];
     }
 
@@ -42,11 +52,13 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+        if (! Auth::attempt($this->only('name', 'password'), $this->boolean('remember'))) {
+            // if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'name' => 'Désolé, votre nom ou votre mot de passe est incorrect.',
+                // 'name' => trans('auth.failed'),
             ]);
         }
 

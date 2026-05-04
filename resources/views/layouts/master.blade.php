@@ -31,6 +31,8 @@
     @include('layouts.navbar')
     @yield('content')
     
+    
+
     @if (request()->routeIs('accueil'))
         <script src="{{ asset('js/accueil.js') }}"></script>    
     @endif
@@ -50,6 +52,8 @@
     @if (request()->routeIs('register'))
         <script src="{{ asset('js/regiser.js') }}"></script>
     @endif
+
+    {{-- @yield('javascript') --}}
 
 </body>
 </html>

@@ -19,22 +19,26 @@
                         <h1>Connectez-vous</h1>
                         <p>Choisissez votre prix</p>
                     </div>
-                    <form action="" method="post" class="pe-4">
-                        <input type="text" class="form-control" placeholder="Nom">
-                        <input type="password" class="form-control" placeholder="Mots de passe">
-                        <select name="" id="" class="form-control">
+                    <form action="{{ route('login') }}" method="post" class="pe-4">
+                        @csrf
+                        <input type="text" placeholder="Nom" name="name" value="{{ old('name') }}" class="form-control @error('name') is-invalid @enderror">
+                        @error('name')
+                            <p class="invalid-feedback">{{ $message }}</p>
+                        @enderror
+                        <input type="password" placeholder="Mots de passe" name="password" class="form-control @error('password') is-invalid @enderror">
+                        @error('password')
+                            <p class="invalid-feedback">{{ $message }}</p>
+                        @enderror
+                        {{-- <select name="" id="" class="form-control">
                             <option value="" style="color: grey">---Passagier ou Chauffeur---</option>
                             <option value="Passagier">Passagier</option>
                             <option value="chauf">Chauffeur</option>
-                        </select>
-                        {{-- <div class="text-end mt-3">
-                            <a href="" style="text-decoration: none; color: #000;" class="ms-auto text-end">Etes vous chauffeur?</a>
-                        </div> --}}
+                        </select> --}}
                         
                         <input type="submit" value="Se connecter" class="btn btn-dark w-50 d-block mx-auto inscri my-4">
                         <p class="insc">
                             Pas encore de compte? 
-                            <a href="#" class="ins">S'inscrire</a>
+                            <a href="#" class="ins" id="show-register">S'inscrire</a>
                         </p>
                     </form>
                 </div>
@@ -80,7 +84,7 @@
                         @enderror
                         
                         <input type="submit" value="S'inscrire" class="btn btn-dark w-50 d-block mx-auto inscri my-4">
-                        <p>Déja une compte? <a href="" class="conn">Se connecter</a></p>
+                        <p>Déja une compte? <a href="#" class="conn" id="show-login">Se connecter</a></p>
                     </form>
                 </div>
                 <div class="col-lg-6 im d-none d-lg-block p-0">
