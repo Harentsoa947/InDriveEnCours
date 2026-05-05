@@ -8,10 +8,10 @@
     <div class="container">
         <div class="box el1">
             <div class="row">
-                <div class="col-lg-6 im p-0">
+                <div class="col-lg-6 im p-0 order-2 order-lg-1">
                     <img src="images/paul-hanaoka-D-qq7W751vs-unsplash.jpg" alt="">
                 </div>
-                <div class="col-lg-6 text">
+                <div class="col-lg-6 text  ps-4 order-1 order-lg-2">
                     <div class="logo pe-4">
                         <img src="images/indrive-icon-logo.png" alt="">
                     </div>
