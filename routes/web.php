@@ -30,4 +30,6 @@ Route::get('/', [GlobalController::class, 'accueil'])->name('accueil');
 Route::post('/', [GlobalController::class, 'reservation']);
 Route::get('choix_trajet', [GlobalController::class, 'choix_trajet'])->name('choix_trajet');
 // Route::get('register2', [GlobalController::class, 'register2'])->name('register2');
-Route::get('connexion', [GlobalController::class, 'connexion'])->name('connexion');
+// Route::get('connexion', [GlobalController::class, 'connexion'])->name('connexion');
+
+// Route::post()

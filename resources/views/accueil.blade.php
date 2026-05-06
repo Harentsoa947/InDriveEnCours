@@ -3,7 +3,7 @@
 @section('title', 'InDrive')
 
 @section('content')
-<form action="" method="POST">
+<form action="{{ route('reservation') }}" method="POST">
     <div class="container" style="margin: 60px auto;">
         <div class="row">
             <div class="col-lg-6 d-flex justify-content-center justify-content-lg-start">
@@ -46,8 +46,8 @@
                         </div>
                     </div>
                     <div class="reserver">
-                        <a href="{{ route('choix_trajet') }}">Réserver</a>
-                        {{-- <button>Réserver</button> --}}
+                        {{-- <a href="{{ route('choix_trajet') }}">Réserver</a> --}}
+                        <button>Réserver</button>
                     </div>
                 </div>
                 

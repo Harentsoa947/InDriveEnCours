@@ -17,7 +17,7 @@
     @if (request()->routeIs('accueil'))
         <link rel="stylesheet" href="{{ asset('css/accueil.css') }}">
     @endif
-    @if (request()->routeIs('register'))
+    @if (request()->routeIs('register') || request()->routeIs('login'))
     <link rel="stylesheet" href="{{ asset('css/register.css') }}">
     @endif
     
@@ -48,10 +48,10 @@
         <script src="{{ asset('js/trajet.js') }}"></script>    
     @endif
     
-
+{{-- 
     @if (request()->routeIs('register'))
         <script src="{{ asset('js/regiser.js') }}"></script>
-    @endif
+    @endif --}}
 
     {{-- @yield('javascript') --}}
 

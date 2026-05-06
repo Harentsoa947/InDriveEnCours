@@ -31,6 +31,7 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
+            // $request->validate([
             'name' => ['required', 'string', 'max:25', 'min:5'],
             // 'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'numero_phone' => ['required'],
@@ -43,6 +44,7 @@ class RegisteredUserController extends Controller
             'name.max' => 'Votre nom est trop long',
             'name.min' => 'Votre nom est trop court',
             'role.required' => 'Vous devez avoir une rôle',
+            'numero_phone.required' => 'Vous devez entre une numéro de téléphone',
             // 'email.required' => 'Champ email obligatoire',
             'password.required' => 'Créer votre propre de mots de passe',
             'password.confirmed' => 'Le mots de passe est différent'

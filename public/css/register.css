@@ -58,7 +58,7 @@ body{
     margin: 0;
 }
 /* Position initiale */
-.el1 { 
+/* .el1 { 
     transform: rotateY(0deg); 
     z-index: 2; 
 }
@@ -67,11 +67,11 @@ body{
     transform: rotateY(180deg); 
     display: block !important; 
     z-index: 1;
-}
+} */
 
 /* Classes de bascule */
-.rotate-to-auth .el1 { transform: rotateY(-180deg); }
-.rotate-to-auth .el2 { transform: rotateY(0deg); z-index: 3; }
+/* .rotate-to-auth .el1 { transform: rotateY(-180deg); }
+.rotate-to-auth .el2 { transform: rotateY(0deg); z-index: 3; } */
 .text{
     padding: 50px 0;
     height: 100%;
