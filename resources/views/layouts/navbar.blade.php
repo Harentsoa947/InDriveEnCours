@@ -53,3 +53,9 @@
       </div>
     </div>
 </nav>
+@if (session('success'))
+    <div class="alert alert-success">{{ session('success') }}</div>
+@endif
+@if (session('decon'))
+  <div class="alert alert-danger">{{ session('decon') }}</div>
+@endif
