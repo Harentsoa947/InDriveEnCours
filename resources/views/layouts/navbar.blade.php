@@ -22,12 +22,33 @@
           
         </ul>
         <ul class="navbar-nav mb-2 mb-lg-0">
-            <li class="nav-item">
+            {{-- @dd(auth()->user()->role) --}}
+            @auth
+              
+              <li class="nav-item connecter_user">
+                <a class="nav-link" href="">{{ auth()->user()->name }} ({{ auth()->user()->role }})</a>
+                <div class="plus">
+                  <ul>
+                    <li><a href="{{ route('dashboard') }}">Profil</a></li>
+                    <form action="{{ route('logout') }}" method="post">
+                      <li><button type="submit">Se déconnecter</button></li>
+                    </form>
+                    
+                  </ul>
+                </div>
+              </li>
+              <br>
+              
+            @endauth
+            @guest
+              <li class="nav-item">
                 <a class="nav-link" href="{{ route('register') }}">Inscription</a>
-            </li>
-            <li class="nav-item inscription ms-3">
-                <a class="nav-link" href="{{ route('login') }}" id="inscript">Se connecter</a>
-            </li>
+              </li>
+              <li class="nav-item inscription ms-3">
+                  <a class="nav-link" href="{{ route('login') }}" id="inscript">Se connecter</a>
+              </li>    
+            @endguest
+            
         </ul>
       </div>
     </div>

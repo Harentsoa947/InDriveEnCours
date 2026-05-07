@@ -32,3 +32,50 @@ nav{
    position: relative; 
    z-index: 9999;
 }
+.connecter_user a{
+    color: #fff;
+    border-bottom: 2px solid #ebe300;
+}
+.connecter_user a:hover{
+    color: #fff;
+    cursor: pointer;
+}
+.connecter_user:hover .plus{
+
+    display: block;
+}
+.plus{
+    display: none;
+    position: relative;
+}
+.plus ul{
+    background: #fff;
+    width: 100%;
+    position: absolute;
+    box-shadow: 1px 1px 2px #000;
+    padding-left: 10px;
+    border-radius: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.plus ul li a{
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    border: none;
+}
+.plus ul li{
+    padding: 5px 0;
+}
+.plus ul li a:hover{
+    color: #000;
+}
+li{
+    list-style: none;
+}
+.plus form button{
+    border: none;
+    color: #000;
+    font-weight: bold;
+    background: #fff;
+}
