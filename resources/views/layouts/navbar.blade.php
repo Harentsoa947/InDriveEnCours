@@ -14,29 +14,39 @@
             <!-- <a class="nav-link active"href="#">Déplacer-vous avec InDrive</a> -->
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Génerer des revenus</a>
+            <a class="nav-link" href="#">Tarifs de base</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Professionel</a>
-          </li>
+          @auth
+            @if (auth()->user()->role == 'Chauffeur')
+              <li class="nav-item" style="position: relative">
+                <a class="nav-link" href="#">Réservation en cours <span class="nb_res">5</span></a>
+              </li>    
+            @endif
+            <li class="nav-item">
+              <a class="nav-link" href="{{ route('choix_trajet') }}">Planifier un trajet</a>
+            </li>    
+          @endauth
+          
           
         </ul>
         <ul class="navbar-nav mb-2 mb-lg-0">
-            {{-- @dd(auth()->user()->role) --}}
             @auth
-              
-              <li class="nav-item connecter_user">
-                <a class="nav-link" href="">{{ auth()->user()->name }} ({{ auth()->user()->role }})</a>
+            <li class="nav-item inscription">
+              <a class="nav-link inscript" href="#">Compte : {{ auth()->user()->role }}</a>
+            </li> 
+              <li class="nav-item connecter_user ms-4">
+                <a class="nav-link" href="">{{ auth()->user()->name }}</a>
                 <div class="plus">
                   <ul>
                     <li><a href="{{ route('dashboard') }}">Profil</a></li>
                     <form action="{{ route('logout') }}" method="post">
                       <li><button type="submit">Se déconnecter</button></li>
                     </form>
-                    
+                         
                   </ul>
                 </div>
               </li>
+              
               <br>
               
             @endauth
@@ -45,7 +55,7 @@
                 <a class="nav-link" href="{{ route('register') }}">Inscription</a>
               </li>
               <li class="nav-item inscription ms-3">
-                  <a class="nav-link" href="{{ route('login') }}" id="inscript">Se connecter</a>
+                  <a class="nav-link" href="{{ route('login') }}" class="inscript">Se connecter</a>
               </li>    
             @endguest
             
