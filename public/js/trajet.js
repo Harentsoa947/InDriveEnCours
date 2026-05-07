@@ -152,7 +152,12 @@ function affichageMap(lat, lng){
 
             document.querySelector('.distance').style.display = 'block'
             document.querySelector('.distance').textContent = di  + ' KM (en routes)'
-
+            
+            // en KM
+            document.querySelector('.kilom').value = di
+            
+            
+            console.log(document.querySelector('.kilom').value);
 
             
 

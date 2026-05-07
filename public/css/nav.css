@@ -93,3 +93,6 @@ li{
     justify-content: center;
     align-items: center;
 }
+a.activePers{
+    border-bottom: 3px solid #ebe300;
+}

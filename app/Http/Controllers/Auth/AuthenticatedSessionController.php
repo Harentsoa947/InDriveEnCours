@@ -30,7 +30,7 @@ class AuthenticatedSessionController extends Controller
 
         return redirect()
         ->intended(route('accueil', absolute: false))
-        ->with('success', 'Vous êtes connecter');
+        ->with('success', 'Connexion réussie');
         // return redirect()->intended(route('dashboard', absolute: false));
     }
 

@@ -9,22 +9,39 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent diff_lien">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          @auth
+            @if (auth()->user()->role == 'Chauffeur')
+              <li class="nav-item" style="position: relative">
+                <a class="nav-link" href="#" style="color: #fff;">Configurer votre tarif</a>
+              </li>    
+            @endif    
+          @endauth
+          
+          
           <li class="nav-item">
-            <a class="nav-link" href="#" style="color: #fff;">Déplacer-vous avec InDrive</a>
-            <!-- <a class="nav-link active"href="#">Déplacer-vous avec InDrive</a> -->
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Tarifs de base</a>
+            <a  href="#" 
+              @class([
+                'nav-link', 
+                'activePers' => request()->routeIs('tarif')
+              ])>
+            {{-- class="nav-link activePers"> --}}
+              Tarifs de base
+            </a>
           </li>
           @auth
             @if (auth()->user()->role == 'Chauffeur')
               <li class="nav-item" style="position: relative">
                 <a class="nav-link" href="#">Réservation en cours <span class="nb_res">5</span></a>
+              </li>
+            @else
+              <li class="nav-item">
+                <a href="{{ route('choix_trajet') }}" 
+                @class(['nav-link', 'activePers' => request()->routeIs('choix_trajet')])>
+                  Planifier un trajet
+                </a>
               </li>    
             @endif
-            <li class="nav-item">
-              <a class="nav-link" href="{{ route('choix_trajet') }}">Planifier un trajet</a>
-            </li>    
+            
           @endauth
           
           
@@ -55,7 +72,7 @@
                 <a class="nav-link" href="{{ route('register') }}">Inscription</a>
               </li>
               <li class="nav-item inscription ms-3">
-                  <a class="nav-link" href="{{ route('login') }}" class="inscript">Se connecter</a>
+                  <a class="nav-link inscript" href="{{ route('login') }}">Se connecter</a>
               </li>    
             @endguest
             

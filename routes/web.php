@@ -27,7 +27,7 @@ Route::get('/villes/recherche', [CityController::class, 'recherche_ville']);
 Route::get('/point/chauffeur', [CityController::class, 'point_chauffeur']);
 
 Route::get('/', [GlobalController::class, 'accueil'])->name('accueil');
-Route::get('choix_trajet', [GlobalController::class, 'choix_trajet'])->name('choix_trajet');
+Route::get('choix_trajet', [GlobalController::class, 'choix_trajet'])->name('choix_trajet')->middleware('auth');
 // Route::get('register2', [GlobalController::class, 'register2'])->name('register2');
 // Route::get('connexion', [GlobalController::class, 'connexion'])->name('connexion');
 
