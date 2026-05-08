@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('depart');
             $table->string('destination');
             $table->string('prix');
-            $table->string('status');
+            $table->string('status')->default('pending');
             
             $table->timestamps();
         });

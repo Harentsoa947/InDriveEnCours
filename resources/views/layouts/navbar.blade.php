@@ -31,10 +31,15 @@
           @auth
             @if (auth()->user()->role == 'Chauffeur')
               <li class="nav-item" style="position: relative">
-                <a class="nav-link" href="#">Réservation en cours <span class="nb_res">5</span></a>
+                <a 
+                  href="{{ route('afficher_trajet') }}"
+                  @class(['nav-link', 'activePers' => request()->routeIs('afficher_trajet')])>
+                  Réservation en cours <span class="nb_res">5</span>
+                </a>
               </li>
             @else
               <li class="nav-item">
+                {{-- + gate(accessible que pour passager) --}}
                 <a href="{{ route('choix_trajet') }}" 
                 @class(['nav-link', 'activePers' => request()->routeIs('choix_trajet')])>
                   Planifier un trajet
@@ -85,4 +90,7 @@
 @endif
 @if (session('decon'))
   <div class="alert alert-danger">{{ session('decon') }}</div>
+@endif
+@if (session('etat'))
+    <div class="alert alert-info">{{ session('etat') }}</div>
 @endif

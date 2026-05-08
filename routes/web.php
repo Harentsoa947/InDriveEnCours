@@ -32,3 +32,6 @@ Route::get('choix_trajet', [GlobalController::class, 'choix_trajet'])->name('cho
 // Route::get('connexion', [GlobalController::class, 'connexion'])->name('connexion');
 
 // Route::post('/reservation', [GlobalController::class, 'reservation'])->name('reservation')->middleware('auth');
+
+Route::post('/new_trajet', [GlobalController::class, 'new_trajet'])->name('new_trajet')->middleware('auth');
+Route::get('/afficher_trajet', [GlobalController::class, 'afficher_trajet'])->name('afficher_trajet')->middleware('auth');
