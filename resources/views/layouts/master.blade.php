@@ -17,6 +17,9 @@
     @if (request()->routeIs('accueil'))
         <link rel="stylesheet" href="{{ asset('css/accueil.css') }}">
     @endif
+    @if (request()->routeIs('afficher_trajet'))
+        <link rel="stylesheet" href="{{ asset('css/afficher_trajet.css') }}">
+    @endif
     @if (request()->routeIs('register') || request()->routeIs('login'))
     <link rel="stylesheet" href="{{ asset('css/register.css') }}">
     @endif
@@ -27,11 +30,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <title>@yield('title')</title>
 </head>
-<body>
+<body id="all">
     @include('layouts.navbar')
     @yield('content')
     
-    
+    @if (request()->routeIs('afficher_trajet'))
+        <script src="{{ asset('js/afficher_trajet.js') }}"></script>
+    @endif
 
     @if (request()->routeIs('accueil'))
         <script src="{{ asset('js/accueil.js') }}"></script>    

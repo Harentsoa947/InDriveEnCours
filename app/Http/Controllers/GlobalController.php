@@ -21,10 +21,14 @@ class GlobalController extends Controller
     {
         return view('choix_trajet');
     }
-    public function afficher_trajet()
+    public function afficher_trajet($id = null)
     {
-        $trip = Trip::with('user')->get();
-        return view('affiche_trajet', compact('trip'));
+        if($id){
+            $trip = Trip::findOrFail($id);
+            return view('affiche_trajet', ['trip' => $trip, 'id' =>$id]);
+        }
+        $trips = Trip::with('user')->get();
+        return view('affiche_trajet', ['trips' => $trips, 'id'=> $id]);
     }
     public function new_trajet(Request $req)
     {
