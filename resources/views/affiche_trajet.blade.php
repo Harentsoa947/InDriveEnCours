@@ -73,3 +73,25 @@
     
     
 @endsection
+{{-- Role : chauffeur --}}
+
+{{-- 
+    1.Compacte (Image d'une petite voiture)
+
+    2.Berline (Image d'une voiture allongée)
+
+    3.SUV / 4x4 (Image d'une voiture haute)
+
+    4.Van (Image d'une voiture à 7 places) 
+    
+    Voiture électrique alimentation
+--}}
+
+
+{{-- 
+    Type,               Description Visuelle,                                   Usage pour le Passager
+    Compacte,           Petite voiture (ex: Peugeot 208),                       "Économique, pour 1-2 personnes."
+    Berline,            Voiture allongée (ex: Toyota Corolla),                  "Confortable, avec un vrai coffre."
+    SUV / 4x4,          Voiture haute (ex: Dacia Duster),                       "Robuste, espace et sécurité."
+    Van,                Voiture à 7 places (ex: Mini-bus),                      Pour les groupes et familles. 
+--}}
