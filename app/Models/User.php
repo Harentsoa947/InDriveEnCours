@@ -45,4 +45,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    
+
+    // Un utilisateur appartient à un type de voiture
+    public function typeVoiture()
+    {
+        // On précise 'type_voitures_id' car c'est le nom que tu as choisi dans ta migration
+        return $this->belongsTo(Type_voitures::class, 'type_voitures_id');
+    }
 }
+

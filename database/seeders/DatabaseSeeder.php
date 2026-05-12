@@ -35,6 +35,33 @@ class DatabaseSeeder extends Seeder
             'bagage' => '1',
         ]);
 
+        Type_voitures::create([
+            'type' => 'Berline',
+            'description_voiture' => 'Voiture classique avec un coffre séparé et un bon confort.',
+            'usage_passager' => 'Parfait pour le confort et les bagages moyens.',
+            // nbr de passager maximum
+            'nbr_passager' => '5',
+            'bagage' => '2',
+        ]);
+
+        Type_voitures::create([
+            'type' => 'SUV / 4x4',
+            'description_voiture' => 'Véhicule haut, robuste et spacieux',
+            'usage_passager' => 'Idéal pour les routes difficiles ou beaucoup de bagages',
+            // nbr de passager maximum
+            'nbr_passager' => '5',
+            'bagage' => '3',
+        ]);
+
+        Type_voitures::create([
+            'type' => 'Van',
+            'description_voiture' => 'Grand véhicule spacieux avec 7 places assises.',
+            'usage_passager' => 'Le meilleur choix pour les groupes ou familles nombreuses.',
+            // nbr de passager maximum
+            'nbr_passager' => '7',
+            'bagage' => '2',
+        ]);
+
         LocalisationChauffeur::factory(50)->create();
     }
 }
