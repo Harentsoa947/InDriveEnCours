@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Type_voitures;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -20,7 +21,8 @@ class RegisteredUserController extends Controller
      */
     public function create(): View
     {
-        return view('auth.register');
+        $typeV = Type_voitures::all();
+        return view('auth.register', compact('typeV'));
     }
 
     /**
@@ -32,10 +34,15 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             // $request->validate([
-            'name' => ['required', 'string', 'max:25', 'min:5'],
+            'name' => ['required', 'string', 'max:25', 'min:5', 'unique:users,name'],
             // 'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'numero_phone' => ['required'],
             'role' => ['required', 'string'],
+
+            'marque_voiture' => ['required_if:role,Chauffeur'],
+            'typeV' => ['required_if:role,Chauffeur'],
+            'electrique' => ['required_if:role,Chauffeur'],
+
             'password' => ['required', 'confirmed'],
             // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ], [
@@ -43,12 +50,24 @@ class RegisteredUserController extends Controller
             'name.string' => 'Votre nom n\'est pas valide',
             'name.max' => 'Votre nom est trop long',
             'name.min' => 'Votre nom est trop court',
+            'name.unique' => 'Ce nom existe déja',
             'role.required' => 'Vous devez avoir une rôle',
+
+            'marque_voiture.required_if' => 'Veuillez entré le marque du voiture',
+            'typeV.required_if' => 'Selectionnez le type du voiture',
+            'electrique.required_if' => 'Votre voiture est électrique ou pas?',
+
             'numero_phone.required' => 'Vous devez entre une numéro de téléphone',
             // 'email.required' => 'Champ email obligatoire',
             'password.required' => 'Créer votre propre de mots de passe',
             'password.confirmed' => 'Le mots de passe est différent'
         ]);
+        
+        if($request->electrique === 'true'){
+            $elec = true;
+        }else if($request->electrique === 'false'){
+            $elec = false;
+        }
 
         $user = User::create([
             'name' => $request->name,
@@ -56,6 +75,9 @@ class RegisteredUserController extends Controller
             'numero_phone' => $request->numero_phone,
             'role' => $request->role,
             'password' => Hash::make($request->password),
+            'marque_voiture' => $request->marque_voiture ?? null,
+            'type_voitures_id' => $request->typeV ?? null,
+            'electrique' => $elec ?? null
         ]);
 
         event(new Registered($user));
@@ -63,7 +85,7 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         // reidrection
-        return redirect(route('accueil', absolute: false));
+        return redirect()->route('accueil')->with('inscrit', 'Compte crée');
         // return redirect(route('dashboard', absolute: false));
     }
 }

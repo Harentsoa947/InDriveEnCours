@@ -13,12 +13,13 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('marque_voiture')->nullable()->after('role');
+            $table->integer('electrique')->nullable()->after('marque_voiture');
             $table->foreignId('type_voitures_id')
                     ->nullable()
                     ->constrained('type_voitures')
                     ->onUpdate('cascade')
                     ->onDelete('cascade')
-                    ->after('marque_voiture');
+                    ->after('role');
         });
     }
 

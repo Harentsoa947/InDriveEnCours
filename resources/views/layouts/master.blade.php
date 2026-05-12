@@ -53,10 +53,10 @@
         <script src="{{ asset('js/trajet.js') }}"></script>    
     @endif
     
-{{-- 
+
     @if (request()->routeIs('register'))
         <script src="{{ asset('js/regiser.js') }}"></script>
-    @endif --}}
+    @endif
 
     {{-- @yield('javascript') --}}
 
