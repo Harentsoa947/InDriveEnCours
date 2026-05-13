@@ -20,6 +20,8 @@ navigator.geolocation.getCurrentPosition(function(position){
     // Point de l'utilisateur
     pointA.lat = position.coords.latitude
     pointA.lng = position.coords.longitude
+    console.log(pointA.lat);
+    // console.log(pointA.lat + 0.007);
     affichageMap(pointA.lat, pointA.lng)
 })
 
@@ -58,7 +60,7 @@ function affichageMap(lat, lng){
     // marker de départ
     function markerDepart(lat, lng){
         
-        console.log("Passage dans le fonction de marker de départ");
+        // console.log("Passage dans le fonction de marker de départ");
         if(marker){
             map.removeLayer(marker)
         }
@@ -399,8 +401,8 @@ function affichageMap(lat, lng){
     .then(res => res.json())
     .then(data => {
         data.forEach((d)=>{
-            console.log(d.id);
-            console.log(d.nomChauf);
+            // console.log(d.id);
+            // console.log(d.nomChauf);
             chauffeur(map, d.latChauf, d.lonChauf, d.nomChauf)
         })
     })

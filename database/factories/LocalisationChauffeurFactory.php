@@ -18,7 +18,7 @@ class LocalisationChauffeurFactory extends Factory
     public function definition(): array
     {
         return [
-            'nomChauf' => $this->faker->name(),
+            // 'nomChauf' => $this->faker->name(),
             'latChauf' => $this->faker->latitude(-19.0, -18.7),
             'lonChauf' => $this->faker->longitude(47.3, 47.7)
         ];

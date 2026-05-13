@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('localisation_chauffeurs', function (Blueprint $table) {
             $table->id();
-            $table->string('nomChauf');
+            // $table->string('nomChauf');
             $table->decimal('latChauf', 10, 8);
             $table->decimal('lonChauf', 11, 8);
             $table->timestamps();

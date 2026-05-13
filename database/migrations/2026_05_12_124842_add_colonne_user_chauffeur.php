@@ -14,12 +14,17 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('marque_voiture')->nullable()->after('role');
             $table->integer('electrique')->nullable()->after('marque_voiture');
+            $table->foreignId('position_chauffeur_id')
+                    ->nullable()
+                    ->constrained('localisation_chauffeurs')
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');
             $table->foreignId('type_voitures_id')
                     ->nullable()
                     ->constrained('type_voitures')
                     ->onUpdate('cascade')
-                    ->onDelete('cascade')
-                    ->after('role');
+                    ->onDelete('cascade');
+                    // ->after('role');
         });
     }
 

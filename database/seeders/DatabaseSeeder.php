@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\LocalisationChauffeur;
 use App\Models\Type_voitures;
 use App\Models\User;
+use Database\Factories\UserFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -62,6 +63,10 @@ class DatabaseSeeder extends Seeder
             'bagage' => '2',
         ]);
 
-        LocalisationChauffeur::factory(50)->create();
+        // seeders chauffeur
+
+        LocalisationChauffeur::factory(150)->create();
+        User::factory(150)->create();
+        // UserFactory::factory(150)->create();
     }
 }
