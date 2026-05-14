@@ -9,6 +9,8 @@ let pointB = {
     lng: null
 };
 
+let allDisChauf
+
 document.querySelector('#fond').style.visibility = 'visible'
 console.log("Etat initial");
 
@@ -42,7 +44,7 @@ function affichageMap(lat, lng){
 
     // Tuiles
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
+        maxZoom: 25,
         // attribution: '&copy; OpenStreetMap France | &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         updateWhenIdle: true,    // Attend que l'utilisateur arrête de bouger pour charger
         keepBuffer: 2,           // Garde en mémoire les tuiles autour pour un mouvement fluide
@@ -357,8 +359,10 @@ function affichageMap(lat, lng){
                     map.removeLayer(layer);
                 });
 
+                chargerChauffeurs(map)
+
                 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    maxZoom: 19
+                    maxZoom: 25
                 }).addTo(map);
 
                 document.querySelector('#rech').value = ""
@@ -397,15 +401,11 @@ function affichageMap(lat, lng){
         `;
     }
 
-    fetch(chauffeurBase)
-    .then(res => res.json())
-    .then(data => {
-        data.forEach((d)=>{
-            // console.log(d.id);
-            // console.log(d.nomChauf);
-            chauffeur(map, d.latChauf, d.lonChauf, d.nomChauf)
-        })
-    })
+    chargerChauffeurs(map, pointA.lat, pointA.lng)
+    // console.log(allDisChauf);
+    // console.log(allDisChauf[0]);
+    // creation_distance()
+    
     
 }
 
@@ -438,4 +438,43 @@ function chauffeur(map, latChauf, lonChauff, nom){
         offeset: [0, 10]
     })
 
+}
+
+function chargerChauffeurs(map,lat, lon){
+    allDisChauf = [];
+    console.log(chauffeurBase);
+    fetch(chauffeurBase)
+    .then(res => res.json())
+    .then(data => {
+        data.forEach((d)=>{
+            // console.log(d.id);
+            // console.log(d.name);
+            // console.log(d.local_chauf.latChauf);
+            chauffeur(map, d.local_chauf.latChauf, d.local_chauf.lonChauf, d.name)
+            // trajet(lat, lng, lat1, lng1)
+            let distance = calculDistance(lat, lon, d.local_chauf.latChauf, d.local_chauf.lonChauf)
+            let disChauf = {
+                'id': d.id,
+                'nomChaf': d.name,
+                'distance': distance
+            }
+
+            allDisChauf.push(disChauf)
+
+            // console.log(allDisChauf);
+            
+        })
+        creation_distance(allDisChauf)
+    })
+
+}
+
+// creation affichage
+function creation_distance(dist){
+    let affDis  = document.querySelector('#affDis')
+    let ul = document.createElement('ul')
+    
+    dist.forEach(e => {
+        console.log(e.id);
+    });
 }

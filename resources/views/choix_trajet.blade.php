@@ -15,48 +15,51 @@
                 </div>
                                    
             @else
-            <div class="col-lg-3 champ_recherche">
+                <div class="col-lg-3 champ_recherche">
 
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul class="mb-0">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+            
+                    <div class="distance mb-3"></div>
         
-                <div class="distance mb-3"></div>
-    
-                <input type="hidden" name="kilometre" class="kilom">
-    
-                <div class="recherche2">
-                    <div style="position: relative">
-                        <div id="loader1" class="loader1"></div>
-                        <input type="text" class="form-control @error('depart') is-invalid @enderror" id="rech2" placeholder="Changer votre point de départ" name="depart">
-                    </div>
-                    {{-- <form action="" style="position: relative;">
+                    <input type="hidden" name="kilometre" class="kilom">
+        
+                    <div class="recherche2">
+                        <div style="position: relative">
+                            <div id="loader1" class="loader1"></div>
+                            <input type="text" class="form-control @error('depart') is-invalid @enderror" id="rech2" placeholder="Changer votre point de départ" name="depart">
+                        </div>
                         
-                    </form> --}}
-                </div>
-    
-                {{-- <div style="margin: 10px 0;"></div> --}}
-    
-                <div class="recherche my-3">
-                    <div style="position: relative">
-                        <div id="loader" class="loader"></div>
-                        <input type="text" id="rech" class="form-control @error('destination') is-invalid @enderror" placeholder="Rechercher votre destination" name="destination">
                     </div>
-                    {{-- <form action="" class="form" style="position: relative;">
+        
+                    
+        
+                    <div class="recherche my-3">
+                        <div style="position: relative">
+                            <div id="loader" class="loader"></div>
+                            <input type="text" id="rech" class="form-control @error('destination') is-invalid @enderror" placeholder="Rechercher votre destination" name="destination">
+                        </div>
                         
-                    </form> --}}
+                    </div>
+        
+                    <input type="" value="Réserver" class="btn btn-dark w-75 mx-auto d-block">
+
+
+                    <div id="affDis" class="mt-3">
+                        
+                    </div>
+                    
                 </div>
-    
-                <input type="submit" value="Réserver" class="btn btn-dark w-75 mx-auto d-block">
                 
-            </div> 
                 
+
             @endif
             
             

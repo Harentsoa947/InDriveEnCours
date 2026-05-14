@@ -28,10 +28,15 @@ Route::get('/point/chauffeur', [CityController::class, 'point_chauffeur']);
 
 Route::get('/', [GlobalController::class, 'accueil'])->name('accueil');
 Route::get('choix_trajet', [GlobalController::class, 'choix_trajet'])->name('choix_trajet')->middleware('auth');
+Route::post('/new_trajet', [GlobalController::class, 'new_trajet'])->name('new_trajet')->middleware('auth');
+
+
+Route::get('/confirmation', [GlobalController::class, 'confirmation'])->name('confirmation');
+
 // Route::get('register2', [GlobalController::class, 'register2'])->name('register2');
 // Route::get('connexion', [GlobalController::class, 'connexion'])->name('connexion');
 
 // Route::post('/reservation', [GlobalController::class, 'reservation'])->name('reservation')->middleware('auth');
 
-Route::post('/new_trajet', [GlobalController::class, 'new_trajet'])->name('new_trajet')->middleware('auth');
+
 Route::get('/afficher_trajet/{id?}', [GlobalController::class, 'afficher_trajet'])->name('afficher_trajet')->middleware('auth');

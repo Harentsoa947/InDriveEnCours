@@ -54,4 +54,10 @@ class GlobalController extends Controller
         $new_tr->save();
         return redirect()->route('accueil')->with('etat', 'En attente d\'une chauffeur');
     }
+
+    public function confirmation()
+    {
+        return view('confirmation_trajet');
+    }
+
 }

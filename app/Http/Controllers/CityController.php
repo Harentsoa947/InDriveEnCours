@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\LocalisationChauffeur;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
@@ -29,7 +31,10 @@ class CityController extends Controller
 
     public function point_chauffeur()
     {
-        $chauffeurs = LocalisationChauffeur::all();
+        // $chauffeurs = LocalisationChauffeur::all();
+        $chauffeurs = User::where('role', 'Chauffeur')
+                        ->with(['localChauf', 'typeVoiture'])
+                        ->get();
         // dd(response()->json($chauffeurs));
         return response()->json($chauffeurs);
     }

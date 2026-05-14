@@ -1,0 +1,9 @@
+.infoDest{
+    background: red;
+    color: #fff;
+    display: flex;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}

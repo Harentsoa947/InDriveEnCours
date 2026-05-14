@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\LocalisationChauffeur;
+use App\Models\Type_voitures;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
@@ -56,6 +58,11 @@ class User extends Authenticatable
     {
         // On précise 'type_voitures_id' car c'est le nom que tu as choisi dans ta migration
         return $this->belongsTo(Type_voitures::class, 'type_voitures_id');
+    }
+
+    public function localChauf()
+    {
+        return $this->belongsTo(LocalisationChauffeur::class, 'position_chauffeur_id');
     }
 }
 
