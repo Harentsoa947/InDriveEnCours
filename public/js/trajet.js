@@ -457,14 +457,16 @@ function chargerChauffeurs(map,lat, lon){
                 'id': d.id,
                 'nomChaf': d.name,
                 'distance': distance
-            }
+            }   
 
             allDisChauf.push(disChauf)
 
             // console.log(allDisChauf);
             
         })
-        creation_distance(allDisChauf)
+        sessionStorage.setItem('allDisChauf', JSON.stringify(allDisChauf))
+        
+        // creation_distance(allDisChauf)
     })
 
 }
@@ -477,4 +479,6 @@ function creation_distance(dist){
     dist.forEach(e => {
         console.log(e.id);
     });
+
+    sessionStorage.setItem('allDisChauf', JSON.stringify(allDisChauf))
 }

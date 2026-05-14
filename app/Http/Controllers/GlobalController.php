@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Trip;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,11 +34,11 @@ class GlobalController extends Controller
     public function new_trajet(Request $req)
     {
         $req->validate([
-            // 'kilometre' => 'required',
+            'kilometre' => 'required',
             'depart' => 'required',
             'destination' => 'required'
         ], [
-            // 'kilometre.required' => 'Il y a un problème lors du calcul du longueur de chemin',
+            'kilometre.required' => 'Vous avez entrée des donner invalide',
             'depart.required' => "Vous devez avoir une point de départ",
             'destination.required' => 'Veuillez remplir le point de déstination'
         ]);
@@ -52,12 +53,32 @@ class GlobalController extends Controller
         // prix (en cours)
         $new_tr->prix = '1000';
         $new_tr->save();
-        return redirect()->route('accueil')->with('etat', 'En attente d\'une chauffeur');
+
+
+        
+
+        return redirect()->route('confirmation');
+        // return redirect()->route('accueil')->with('etat', 'En attente d\'une chauffeur');
+
+
+
+
     }
 
     public function confirmation()
     {
-        return view('confirmation_trajet');
+        $reservation = Trip::where('user_id', auth()->id())
+            ->latest()
+            ->first();
+
+        $chauffeur = User::where('role', 'Chauffeur')->get();
+        // dd($chauffeur);
+        
+        // dd($reservation);
+        return view('confirmation_trajet', [
+            'reservation' => $reservation,
+            'chauffeur' => $chauffeur
+        ]);
     }
 
 }
