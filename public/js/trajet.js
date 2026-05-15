@@ -183,7 +183,7 @@ function affichageMap(lat, lng){
 
 
     document.querySelector('#rech2').addEventListener('input', function(e){
-        console.log("Changement de départ");
+        // console.log("Changement de départ");
         const clearRech = document.querySelector('#resu_rech')
         if(clearRech === null){
             console.log("Le résultat n'existe pas");
@@ -374,6 +374,8 @@ function affichageMap(lat, lng){
                 document.querySelector('#rech2').value = diffVil
                 resuRech.remove()
             }
+            document.querySelector('#latDep').value = lat1
+            document.querySelector('#lonDep').value = lng1
         });
 
         li.appendChild(a);
@@ -464,7 +466,7 @@ function chargerChauffeurs(map,lat, lon){
             // console.log(allDisChauf);
             
         })
-        sessionStorage.setItem('allDisChauf', JSON.stringify(allDisChauf))
+        // sessionStorage.setItem('allDisChauf', JSON.stringify(allDisChauf))
         
         // creation_distance(allDisChauf)
     })
@@ -472,13 +474,13 @@ function chargerChauffeurs(map,lat, lon){
 }
 
 // creation affichage
-function creation_distance(dist){
-    let affDis  = document.querySelector('#affDis')
-    let ul = document.createElement('ul')
+// function creation_distance(dist){
+//     let affDis  = document.querySelector('#affDis')
+//     let ul = document.createElement('ul')
     
-    dist.forEach(e => {
-        console.log(e.id);
-    });
+//     dist.forEach(e => {
+//         console.log(e.id);
+//     });
 
-    sessionStorage.setItem('allDisChauf', JSON.stringify(allDisChauf))
-}
+//     sessionStorage.setItem('allDisChauf', JSON.stringify(allDisChauf))
+// }

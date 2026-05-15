@@ -27,6 +27,9 @@ return new class extends Migration
             $table->string('destination');
             $table->string('prix');
             $table->string('status')->default('pending');
+
+            $table->decimal('latDep', 11, 8);
+            $table->decimal('lonDep', 11, 8);
             
             $table->timestamps();
         });

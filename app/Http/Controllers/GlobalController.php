@@ -36,7 +36,9 @@ class GlobalController extends Controller
         $req->validate([
             'kilometre' => 'required',
             'depart' => 'required',
-            'destination' => 'required'
+            'destination' => 'required',
+            'latDep' => 'required',
+            'lonDep' => 'required'
         ], [
             'kilometre.required' => 'Vous avez entrée des donner invalide',
             'depart.required' => "Vous devez avoir une point de départ",
@@ -50,6 +52,8 @@ class GlobalController extends Controller
         $new_tr->depart = $req->input('depart');
         $new_tr->destination = $req->input('destination');
         $new_tr->kilometre = $req->input('kilometre');
+        $new_tr->latDep = $req->input('latDep');
+        $new_tr->lonDep = $req->input('lonDep');
         // prix (en cours)
         $new_tr->prix = '1000';
         $new_tr->save();
@@ -71,14 +75,48 @@ class GlobalController extends Controller
             ->latest()
             ->first();
 
-        $chauffeur = User::where('role', 'Chauffeur')->get();
-        // dd($chauffeur);
+        $chauffeur = User::where('role', 'Chauffeur')
+            ->with(['localChauf', 'typeVoiture'])
+            ->get();
+
+        // dd($reservation->latDep);
         
-        // dd($reservation);
+        foreach($chauffeur as $c){
+            if($reservation && $c->localChauf){
+                $c->distance = $this->calculDistance(
+                    $reservation->latDep, 
+                    $reservation->lonDep, 
+                    $c->localChauf->latChauf, 
+                    $c->localChauf->lonChauf
+                );
+            }
+        }
+
+
+
         return view('confirmation_trajet', [
             'reservation' => $reservation,
             'chauffeur' => $chauffeur
         ]);
+    }
+
+    public function calculDistance($lat1, $lon1, $lat2, $lon2)
+    {
+        $R = 6371; // Rayon de la Terre en km
+
+        $dLat = ($lat2 - $lat1) * pi() / 180;
+        $dLon = ($lon2 - $lon1) * pi() / 180;
+
+        $a = sin($dLat / 2) ** 2 +
+            cos($lat1 * pi() / 180) *
+            cos($lat2 * pi() / 180) *
+            sin($dLon / 2) ** 2;
+
+        $c = 2 * atan2(sqrt($a), sqrt(1 - $a));
+        
+        $distance = $R * $c;
+
+        return round($distance, 2); // Équivalent de toFixed(2)
     }
 
 }
