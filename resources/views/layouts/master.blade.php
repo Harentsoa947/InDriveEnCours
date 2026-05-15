@@ -36,6 +36,10 @@
 <body id="all">
     @include('layouts.navbar')
     @yield('content')
+
+    <script>
+        document.querySelector('.nb_res').textContent = document.querySelector('#voi').textContent
+    </script>
     
     @if (request()->routeIs('afficher_trajet'))
         <script src="{{ asset('js/afficher_trajet.js') }}"></script>

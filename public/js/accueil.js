@@ -99,3 +99,5 @@ function creation_liste(ville, id){
 }
 // slice : extraire tableau
 // Utilisation de cacert.pem dans php.ini
+
+// document.querySelector('.nb_res').textContent = document.querySelector('#voi').textContent

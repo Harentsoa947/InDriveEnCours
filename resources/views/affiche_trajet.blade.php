@@ -2,6 +2,7 @@
 @section('title', 'Les trajets en attente')
 
 @section('content')
+    <div id="voi" style="display: none;">{{ $requete }}</div>
     <div
         @class(['container-fluid', 'principal' => !empty($id)])>
         <h1 class="text-center">Les trajets en attente</h1>

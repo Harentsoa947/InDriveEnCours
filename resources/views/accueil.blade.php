@@ -4,6 +4,7 @@
 
 @section('content')
 <form action="" method="POST">
+    <div id="voi" style="display: none;">{{ $requete }}</div>
     <div class="container" style="margin: 60px auto;">
         <div class="row">
             <div class="col-lg-6 d-flex justify-content-center justify-content-lg-start">

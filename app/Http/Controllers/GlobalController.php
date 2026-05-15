@@ -12,6 +12,10 @@ use Illuminate\Support\Facades\Auth;
 class GlobalController extends Controller
 {
     public function accueil(){
+        if(Auth::check() && auth()->user()->role == 'Chauffeur'){
+            $requete = RequetTrip::where('chauffeur_id', auth()->user()->id)->count();
+            return view('accueil', ['requete' => $requete]);
+        }
         return view('accueil');
     }
     public function choix_trajet()
@@ -27,10 +31,12 @@ class GlobalController extends Controller
     {
         if($id){
             $trip = Trip::findOrFail($id);
-            return view('affiche_trajet', ['trip' => $trip, 'id' =>$id]);
+            $requete = RequetTrip::where('chauffeur_id', auth()->user()->id)->count();
+            return view('affiche_trajet', ['trip' => $trip, 'id' =>$id, 'requete' => $requete]);
         }
         $trips = Trip::with('user')->get();
-        return view('affiche_trajet', ['trips' => $trips, 'id'=> $id]);
+        $requete = RequetTrip::where('chauffeur_id', auth()->user()->id)->count();
+        return view('affiche_trajet', ['trips' => $trips, 'id'=> $id, 'requete' => $requete]);
     }
     public function new_trajet(Request $req)
     {
