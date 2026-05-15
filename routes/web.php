@@ -32,6 +32,7 @@ Route::post('/new_trajet', [GlobalController::class, 'new_trajet'])->name('new_t
 
 
 Route::get('/confirmation', [GlobalController::class, 'confirmation'])->name('confirmation')->middleware('auth');
+Route::post('/envoyeDemande', [GlobalController::class, 'envoyeDemande'])->name('envoyeDemande')->middleware('auth');
 
 // Route::get('register2', [GlobalController::class, 'register2'])->name('register2');
 // Route::get('connexion', [GlobalController::class, 'connexion'])->name('connexion');

@@ -27,6 +27,6 @@ function filterChauffeurs() {
 document.querySelector('#kilom').addEventListener('change', filterChauffeurs);
 
 document.addEventListener('DOMContentLoaded', function () {
-    document.querySelector('#kilom').value = 3;
+    document.querySelector('#kilom').value = 5;
     filterChauffeurs();
 });

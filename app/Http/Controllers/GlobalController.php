@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\RequetTrip;
 use App\Models\Trip;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -116,6 +117,36 @@ class GlobalController extends Controller
         $distance = $R * $c;
 
         return round($distance, 2); // Équivalent de toFixed(2)
+    }
+
+
+    public function envoyeDemande(Request $req)
+    {
+        // dd($req);
+        $req->validate([
+            'dep' => 'required',
+            'des' => 'required',
+            'disTrajet' => 'required',
+            'prixProposer' => 'required',
+            'chauffeur' => 'required',
+            'Chauf_Passager' => 'required',
+        ], [
+            'chauffeur.required' => 'Vous devez choisir une ou des chauffeurs'
+        ]);
+        // dd(auth()->id());
+        // dd($req->chauffeur);
+        foreach($req->chauffeur as $id){
+            $demande = new RequetTrip();
+            $demande->passager_id = Auth::user()->id;
+            $demande->chauffeur_id = $id;
+            $demande->depart = $req->input('dep');
+            $demande->destination = $req->input('des');
+            $demande->disTrajet = $req->input('disTrajet');
+            $demande->prixProposer = $req->input('prixProposer');
+            $demande->Chauf_Pass_Dis = $req->input('Chauf_Passager');
+            $demande->save();
+        }
+        return redirect()->route('accueil');
     }
 
 }
