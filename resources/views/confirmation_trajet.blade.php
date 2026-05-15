@@ -13,20 +13,21 @@
         <div class="col-lg-3">
             <h5>Filtrage de chauffeur</h5>
             <div class="w-75">
-                <select name="" id="" class="form-control">
-                    <option value="">&lt; 5 KM</option>
-                    <option value="">&lt; 15 KM</option>
-                    <option value="">&lt; 20 KM</option>
-                    <option value=""> Tout</option>
+                <select name="" id="kilom" class="form-control">
+                    <option value="3">&lt; 3 KM</option>
+                    <option value="5">&lt; 5 KM</option>
+                    <option value="6">&lt; 6 KM</option>
+                    <option value="7">&lt; 7 KM</option>
+                    <option value="8">&lt; 8 KM</option>
+                    <option value="9">&lt; 9 KM</option>
+                    <option value="10">&lt; 10 KM</option>
+                    <option value="50"> Tous</option>
                 </select>
             </div>    
         </div>
     </div>
     {{-- Proposition prix --}}
     <div>
-        
-        
-        
         <div style="display: flex; align-items: center;">
             <p class="mt-5">Listes des chauffeurs</p>
             <input type="submit" value="Envoyer votre demande" class="btn btn-dark">
@@ -47,9 +48,11 @@
                 </tr>
             </thead>
             <tbody>
-                {{-- @dd($chauffeur) --}}
                 @foreach ($chauffeur as $ch)
-                    <tr>
+                    {{-- if $ch->distance < 5 --}}
+                    {{-- affichage --}}
+                    
+                    <tr id="ch{{ $ch->id }}" class="all_chauf">
                         <td class="affID">{{ $ch->id }}</td>
                         <td>{{ $ch->name }}</td>
                         <td>{{ $ch->typeVoiture->type }}</td>
@@ -60,7 +63,6 @@
                             <td>Non</td>
                         @endif
                         <td>{{ $ch->typeVoiture->nbr_passager }}</td>
-                        {{-- <td> --}}
                             @if ($ch->typeVoiture->bagage == 1)
                                 <td>Petit Bagage</td>
                             @elseif($ch->typeVoiture->bagage == 2)
@@ -70,8 +72,9 @@
                             @else
                                 <td>Aucun bagage</td>
                             @endif
-                        {{-- </td> --}}
-                        <td>{{ $ch->distance }} KM</td>
+                            <td class="distance" data-distance="{{ $ch->distance }}">
+                                {{ $ch->distance }} KM
+                            </td>
                         <td><input type="checkbox" name="idChauf" value="idChauf" id=""></td>
                         
                     </tr>    
@@ -79,7 +82,11 @@
                 
             </tbody>
         </table>
+        
     </div>
+    <p id="no-driver" class="text-danger fw-bold" style="display:none;">
+        Aucun chauffeur disponible
+    </p>
 </div>
     
 @endsection

@@ -93,7 +93,6 @@ class GlobalController extends Controller
         }
 
 
-
         return view('confirmation_trajet', [
             'reservation' => $reservation,
             'chauffeur' => $chauffeur
