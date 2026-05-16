@@ -4,7 +4,10 @@
 
 @section('content')
 <form action="" method="POST">
-    <div id="voi" style="display: none;">{{ $requete }}</div>
+    @if ($requete)
+        <div id="voi" style="display: none;">{{ $requete }}</div>    
+    @endif
+    
     <div class="container" style="margin: 60px auto;">
         <div class="row">
             <div class="col-lg-6 d-flex justify-content-center justify-content-lg-start">

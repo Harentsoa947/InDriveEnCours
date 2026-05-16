@@ -22,6 +22,11 @@ return new class extends Migration
                 ->nullable()
                 ->nullOnDelete()
                 ->constrained('users');
+
+            $table->foreignId('trip_id')
+            ->nullable()
+            ->constrained('trips')
+            ->nullOnDelete();
             
             $table->string('depart');
             $table->string('destination');

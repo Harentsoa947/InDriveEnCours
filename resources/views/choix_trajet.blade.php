@@ -36,8 +36,8 @@
                              <div style="position: relative">
                                 <div id="loader1" class="loader1"></div>
                                 <input type="text" class="form-control @error('depart') is-invalid @enderror" id="rech2" placeholder="Changer votre point de départ" name="depart">
-                                <input type="text" name="latDep" id="latDep" placeholder="latitude" class="form-control">
-                                <input type="text" name="lonDep" id="lonDep" placeholder="longitude" class="form-control">
+                                <input type="hidden" name="latDep" id="latDep" placeholder="latitude" class="form-control">
+                                <input type="hidden" name="lonDep" id="lonDep" placeholder="longitude" class="form-control">
                              </div>
                              
                          </div>

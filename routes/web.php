@@ -31,7 +31,7 @@ Route::get('choix_trajet', [GlobalController::class, 'choix_trajet'])->name('cho
 Route::post('/new_trajet', [GlobalController::class, 'new_trajet'])->name('new_trajet')->middleware('auth');
 
 
-Route::get('/confirmation', [GlobalController::class, 'confirmation'])->name('confirmation')->middleware('auth');
+Route::get('/confirmation/{validation?}', [GlobalController::class, 'confirmation'])->name('confirmation')->middleware('auth');
 Route::post('/envoyeDemande', [GlobalController::class, 'envoyeDemande'])->name('envoyeDemande')->middleware('auth');
 
 // Route::get('register2', [GlobalController::class, 'register2'])->name('register2');

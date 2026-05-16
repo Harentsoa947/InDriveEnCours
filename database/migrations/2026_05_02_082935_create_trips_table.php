@@ -22,7 +22,7 @@ return new class extends Migration
                     ->nullable()
                     ->constrained('users')
                     ->nullOnDelete();
-            
+           
             $table->string('depart');
             $table->string('destination');
             $table->string('prix');

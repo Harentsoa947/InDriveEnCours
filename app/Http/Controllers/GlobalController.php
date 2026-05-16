@@ -12,21 +12,22 @@ use Illuminate\Support\Facades\Auth;
 class GlobalController extends Controller
 {
     public function accueil(){
+        $requete = null;
         if(Auth::check() && auth()->user()->role == 'Chauffeur'){
             $requete = RequetTrip::where('chauffeur_id', auth()->user()->id)->count();
             return view('accueil', ['requete' => $requete]);
         }
-        return view('accueil');
+        return view('accueil', ['requete' => $requete]);
     }
     public function choix_trajet()
     {
         return view('choix_trajet');
     }
     // Attente de l'authentification utilisateur
-    public function reservation()
-    {
-        return view('choix_trajet');
-    }
+    // public function reservation()
+    // {
+    //     return view('choix_trajet');
+    // }
     public function afficher_trajet($id = null)
     {
         if($id){
@@ -68,16 +69,16 @@ class GlobalController extends Controller
 
         
 
-        return redirect()->route('confirmation');
+        return redirect()->route('confirmation', 'success');
         // return redirect()->route('accueil')->with('etat', 'En attente d\'une chauffeur');
-
-
-
 
     }
 
-    public function confirmation()
+    public function confirmation($validation = null)
     {
+        if($validation == null){
+            return redirect()->route('accueil');
+        }
         $reservation = Trip::where('user_id', auth()->id())
             ->latest()
             ->first();
@@ -136,6 +137,7 @@ class GlobalController extends Controller
             'prixProposer' => 'required',
             'chauffeur' => 'required',
             'Chauf_Passager' => 'required',
+            'idTrip' => 'required'
         ], [
             'chauffeur.required' => 'Vous devez choisir une ou des chauffeurs'
         ]);
@@ -150,8 +152,10 @@ class GlobalController extends Controller
             $demande->disTrajet = $req->input('disTrajet');
             $demande->prixProposer = $req->input('prixProposer');
             $demande->Chauf_Pass_Dis = $req->input('Chauf_Passager');
+            $demande->trip_id = $req->input('idTrip');
             $demande->save();
         }
+        
         return redirect()->route('accueil');
     }
 

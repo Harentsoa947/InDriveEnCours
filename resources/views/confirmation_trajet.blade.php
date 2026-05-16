@@ -3,8 +3,9 @@
 
 @section('content')
 <div class="container-fluid">
+    {{-- {{ $reservation->id }} --}}
     <form action="{{ route('envoyeDemande') }}" method="post">
-        
+        <input type="hidden" name="idTrip" value="{{ $reservation->id }}">
         <input type="hidden" name="dep" value="{{ $reservation->depart }}">
         <input type="hidden" name="des" value="{{ $reservation->destination }}">
         <input type="hidden" name="disTrajet" value="{{ $reservation->kilometre }}">
@@ -16,47 +17,77 @@
                 @endforeach
             </div>
         @endif
-        <div class="row">
-            <div class="col-lg-9">
+        <div class="container-fluid">
+            <div class="border text-center">
                 <p class="valDep"><span class="fw-bold">Départ</span> : {{ $reservation->depart }}</p>
                 <p class="valDes"><span class="fw-bold">Déstination</span> : {{ $reservation->destination }}</p>
                 <p><span class="fw-bold">Distance de votre trajet</span> : {{ $reservation->kilometre }} KM</p>
     
             </div>
-            <div class="col-lg-3">
-                <h5>Filtrage de chauffeur</h5>
-                <div class="w-75">
-                    <select name="" id="kilom" class="form-control">
-                        {{-- <option value="3">&lt; 3 KM</option> --}}
-                        <option value="5">&lt; 5 KM</option>
-                        <option value="6">&lt; 6 KM</option>
-                        <option value="7">&lt; 7 KM</option>
-                        <option value="8">&lt; 8 KM</option>
-                        <option value="9">&lt; 9 KM</option>
-                        <option value="10">&lt; 10 KM</option>
-                        <option value="50"> Tous</option>
-                    </select>
-                </div>    
-            </div>
-        </div>
-        {{-- Proposition prix --}}
-        <div>
-            <div class="d-flex justify-content-around align-items-center">
                 
-                <div>
-                    <label for="">Modifier le prix (en Ar)</label>
-                    {{-- Prix par rapport au distance --}}
-                    <input type="number" class="form-control" value="1000" name="prixProposer">
-                </div>
-                <div class="d-flex align-items-center justify-content-between">
-                    
+            <div class="mt-3 container w-50 border px-3 py-4">
+                <h5>Filtrage de chauffeur</h5>
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="">
+                        <label for="" class="mb-2">Distance entre vous et le chauffeur</label>
+                        <select name="" id="kilom" class="form-control">
+                            {{-- <option value="3">&lt; 3 KM</option> --}}
+                            <option value="5">&lt; 5 KM</option>
+                            <option value="6">&lt; 6 KM</option>
+                            <option value="7">&lt; 7 KM</option>
+                            <option value="8">&lt; 8 KM</option>
+                            <option value="9">&lt; 9 KM</option>
+                            <option value="10">&lt; 10 KM</option>
+                            <option value="50"> Tous</option>
+                        </select>
+                    </div>
                     <div>
-                        <label for=""></label>
-                        <input type="submit" value="Envoyer votre demande" class="btn" style="background-color: #8fc906; font-weight: bold;">
+                        <label for="" class="mb-2">Type de voiture</label>
+                        <select name="" id="" class="form-control">
+                            <option value="">Tous</option>
+                            <option value="">Non Electrique</option>
+                            <option value="">Electrique</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="" class="mb-2">Nombre de place</label>
+                        <input type="number" name="" id="" placeholder="Nombre de place" class="form-control">
+                    </div>
+                    <div>
+                        <label for="" class="mb-2">Bagages</label>
+                        <select name="" id="" class="form-control">
+                            <option value=""></option>
+                            <option value="">Petit</option>
+                            <option value="">Moyen</option>
+                            <option value="">Beaucoup</option>
+                        </select>
+                        
                     </div>
                 </div>
                 
             </div>
+               
+        </div>
+        
+        {{-- Proposition prix --}}
+
+        <div class="mt-5 w-25">
+                
+            <div>
+                <label for="">Modifier le prix (en Ar)</label>
+                <input type="number" class="form-control" value="1000" name="prixProposer">
+            </div>
+            <div class="">
+                
+                <div>
+                    <label for=""></label>
+                    <input type="submit" value="Envoyer votre demande" class="btn" style="background-color: #8fc906; font-weight: bold;">
+                </div>
+            </div>
+            
+        </div>
+        <div>
+            
             
             <h3 class="mt-5">Listes des chauffeurs</h3>
             <table class="table">
@@ -70,7 +101,7 @@
                         <th>Maximum de place</th>
                         <th>Bagage</th>
                         <th>Distance</th>
-                        <th>Alerter</th>
+                        <th>Demander</th>
                     </tr>
                 </thead>
                 <tbody>
