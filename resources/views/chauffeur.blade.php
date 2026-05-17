@@ -10,7 +10,11 @@
         <div class="row">
             <div class="col-lg-6 ">
                 <ul>
-                    {{-- <li class="mt-4 "></li> --}}
+                    <div style="display: none;">
+                        <p class="latitude">{{ $chauffeur->localChauf->latChauf }}</p>
+                        <p class="longitude">{{ $chauffeur->localChauf->lonChauf }}</p>
+                    </div>
+                    
                     <li class="img_user d-flex align-items-center gap-5 mb-3">
                         <img src="{{ asset('images/imageUber.jpg') }}" alt="non trouvé">
                         <div>
@@ -31,6 +35,8 @@
                         </ul>
                     </li>
                 </ul>
+                <h5 style="border-top: 2px solid #000" class="pt-5">Nom de l'endroit où se trouve le chauffeur:</h5>
+                <p class="position"></p>
             </div>
             <div class="col-lg-6">
                 <div id="map"></div>

@@ -162,7 +162,7 @@ class GlobalController extends Controller
     public function chauffeur($id)
     {
         // with : relation, besoin d'un méthode dans le modèle user
-        $chauffeur = User::with('typeVoiture')->find($id);
+        $chauffeur = User::with(['typeVoiture', 'localChauf'])->find($id);
         // Utilisation : {{ $chauffeur->typeVoiture->nom }}
         return view('chauffeur', ['chauffeur' => $chauffeur]);
     }

@@ -1,14 +1,18 @@
-var map = L.map('map', {
-    zoomDelta: 0.25,
-    zoomSnap: 0
-}).setView([-18.9191, 47.5244], 15)
+let lat = document.querySelector('.latitude').textContent
+let lng = document.querySelector('.longitude').textContent
 
-L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 25
-}).addTo(map)
+fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`)
+    .then(response => response.json())
+    .then(data => {
+        let placeName = data.display_name
+        document.querySelector('.position').textContent = placeName
+        var map = L.map('map').setView([lat, lng], 16)
 
-var marker = L.marker([-18.9191, 47.5244]).addTo(map)
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map)
 
-marker.bindPopup('Position du chauffeur', {
-    permanent : true,
-}).openPopup();
+        var marker = L.marker([lat, lng]).addTo(map)
+
+        marker.bindPopup("Chauffeur", {
+            permanent: true
+        }).openPopup()
+    })

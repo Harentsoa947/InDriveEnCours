@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
+use Faker\Factory as Faker;
 
 /**
  * @extends Factory<User>
@@ -40,6 +41,7 @@ class UserFactory extends Factory
             'marque_voiture' => fake()->company(),
             'electrique' => fake()->boolean(),
             'password' => bcrypt('1234'),
+            'photo' => fake()->imageUrl(200, 200, 'people'),
             'position_chauffeur_id' => LocalisationChauffeur::inRandomOrder()->value('id'),
             'type_voitures_id' => Type_voitures::inRandomOrder()->value('id')
         ];

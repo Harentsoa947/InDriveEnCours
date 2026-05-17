@@ -52,8 +52,12 @@
                              
                          </div>
              
-                         <input type="submit" value="Valider" class="btn btn-dark w-75 mx-auto d-block" id="carte">
-     
+                         <input type="submit" value="Planifier" class="btn btn-dark w-75 mx-auto d-block" id="carte">
+                        
+                         <div class="mt-5">
+                            <input type="button" class="btn btn-primary mx-auto d-block" value="Avec vos propre chauffeur">
+                         </div>
+                        
      
                          <div id="affDis" class="mt-3">
                              

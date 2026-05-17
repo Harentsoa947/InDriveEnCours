@@ -111,7 +111,7 @@
                         
                         <tr id="ch{{ $ch->id }}" class="all_chauf">
                             <td class="affID">
-                                <a href="">{{ $ch->id }}</a>
+                                <a href="{{ url('chauffeur/'.$ch->id) }}">{{ $ch->id }}</a>
                             </td>
                             <td>{{ $ch->name }}</td>
                             <td>{{ $ch->typeVoiture->type }}</td>
