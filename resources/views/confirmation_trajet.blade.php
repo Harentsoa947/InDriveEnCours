@@ -71,13 +71,13 @@
         
         {{-- Proposition prix --}}
 
-        <div class="mt-5 w-25">
+        <div class="mt-5 w-25 mx-auto">
                 
             <div>
-                <label for="">Modifier le prix (en Ar)</label>
-                <input type="number" class="form-control" value="1000" name="prixProposer">
+                <label for="" class="mb-2">Modifier le prix (en Ar)</label>
+                <input type="number" class="form-control w-50" value="1000" name="prixProposer">
             </div>
-            <div class="">
+            <div class="mt-2">
                 
                 <div>
                     <label for=""></label>
@@ -93,7 +93,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Numéro Chauffeur</th>
+                        <th>Identifiant Chauffeur</th>
                         <th>Nom</th>
                         <th>Type voiture</th>
                         <th>Marque de voiture</th>
@@ -110,7 +110,9 @@
                         {{-- affichage --}}
                         
                         <tr id="ch{{ $ch->id }}" class="all_chauf">
-                            <td class="affID">{{ $ch->id }}</td>
+                            <td class="affID">
+                                <a href="">{{ $ch->id }}</a>
+                            </td>
                             <td>{{ $ch->name }}</td>
                             <td>{{ $ch->typeVoiture->type }}</td>
                             <td>{{ $ch->marque_voiture }}</td>

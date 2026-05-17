@@ -159,4 +159,12 @@ class GlobalController extends Controller
         return redirect()->route('accueil');
     }
 
+    public function chauffeur($id)
+    {
+        // with : relation, besoin d'un méthode dans le modèle user
+        $chauffeur = User::with('typeVoiture')->find($id);
+        // Utilisation : {{ $chauffeur->typeVoiture->nom }}
+        return view('chauffeur', ['chauffeur' => $chauffeur]);
+    }
+
 }

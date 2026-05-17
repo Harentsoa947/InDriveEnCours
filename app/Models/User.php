@@ -5,7 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Models\LocalisationChauffeur;
 use App\Models\Type_voitures;
-use Database\Factories\UserFactory;
+// use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -52,7 +52,7 @@ class User extends Authenticatable
     }
 
     
-
+    // Relation
     // Un utilisateur appartient à un type de voiture
     public function typeVoiture()
     {

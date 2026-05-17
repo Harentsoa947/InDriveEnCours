@@ -1,0 +1,13 @@
+#map{
+    height: 600px;
+}
+.fa-star{
+    color: rgb(139, 139, 2);
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+.img_user img{
+    width: 120px;
+    height: 120px;
+    object-fit: contain;
+}

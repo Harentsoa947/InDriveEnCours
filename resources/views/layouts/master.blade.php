@@ -27,6 +27,15 @@
     @if (request()->routeIs('confirmation'))
         <link rel="stylesheet" href="{{ asset('css/confirmation.css') }}">
     @endif
+    @if (request()->routeIs('chauffeur'))
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+            integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+            crossorigin=""/>
+            <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+            crossorigin=""></script>
+        <link rel="stylesheet" href="{{ asset('css/carte.css') }}">
+    @endif
     <link rel="shortcut icon" href="{{ asset('images/indrive-icon-logo.png') }}" type="image/x-icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
@@ -37,9 +46,9 @@
     @include('layouts.navbar')
     @yield('content')
 
-    <script>
+    {{-- <script>
         document.querySelector('.nb_res').textContent = document.querySelector('#voi').textContent
-    </script>
+    </script> --}}
     
     @if (request()->routeIs('afficher_trajet'))
         <script src="{{ asset('js/afficher_trajet.js') }}"></script>
@@ -59,6 +68,12 @@
         crossorigin=""></script>
         <script src="{{ asset('js/trajet.js') }}"></script>
         {{-- <script src="{{ asset('js/conf.js') }}"></script> --}}
+    @endif
+    @if (request()->routeIs('chauffeur'))
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+        <script src="{{ asset('js/carte.js') }}"></script>
     @endif
     @if (request()->routeIs('confirmation'))
     <script src="{{ asset('js/conf.js') }}"></script>
