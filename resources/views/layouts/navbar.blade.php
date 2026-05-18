@@ -34,7 +34,7 @@
                 <a 
                   href="{{ route('afficher_trajet') }}"
                   @class(['nav-link', 'activePers' => request()->routeIs('afficher_trajet')])>
-                  Réservation en cours <span class="nb_res">5</span>
+                  Demande passager <span class="nb_res">5</span>
                 </a>
               </li>
             @else
@@ -45,7 +45,15 @@
                   Planifier un trajet
                 </a>
               </li>    
+              <li class="nav-item">
+                <a href="" 
+                  @class(['nav-link', 'activePers' => request()->routeIs('trajet')])>
+                  Trajet
+                  <span class="notif_trajet" style="background: red; ">2</span>
+                </a>
+              </li>
             @endif
+            
             
           @endauth
           

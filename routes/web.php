@@ -26,20 +26,18 @@ require __DIR__.'/auth.php';
 Route::get('/villes/recherche', [CityController::class, 'recherche_ville']);
 Route::get('/point/chauffeur', [CityController::class, 'point_chauffeur']);
 
+// Global
 Route::get('/', [GlobalController::class, 'accueil'])->name('accueil');
+Route::get('/trajet', [GlobalController::class, 'trajet'])->name('trajet')->middleware('auth');
+
+// Pour Passager
 Route::get('choix_trajet', [GlobalController::class, 'choix_trajet'])->name('choix_trajet')->middleware('auth');
 Route::post('/new_trajet', [GlobalController::class, 'new_trajet'])->name('new_trajet')->middleware('auth');
-
 
 Route::get('/confirmation/{validation?}', [GlobalController::class, 'confirmation'])->name('confirmation')->middleware('auth');
 Route::post('/envoyeDemande', [GlobalController::class, 'envoyeDemande'])->name('envoyeDemande')->middleware('auth');
 
-// Route::get('register2', [GlobalController::class, 'register2'])->name('register2');
-// Route::get('connexion', [GlobalController::class, 'connexion'])->name('connexion');
-
-// Route::post('/reservation', [GlobalController::class, 'reservation'])->name('reservation')->middleware('auth');
-
-
-Route::get('/afficher_trajet/{id?}', [GlobalController::class, 'afficher_trajet'])->name('afficher_trajet')->middleware('auth');
-
 Route::get('chauffeur/{id}', [GlobalController::class, 'chauffeur'])->name('chauffeur');
+
+// Pour Chauffeur
+Route::get('/afficher_trajet/{id?}', [GlobalController::class, 'afficher_trajet'])->name('afficher_trajet')->middleware('auth');

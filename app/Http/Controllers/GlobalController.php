@@ -167,4 +167,9 @@ class GlobalController extends Controller
         return view('chauffeur', ['chauffeur' => $chauffeur]);
     }
 
+    public function trajet()
+    {
+        return view('trajet');
+    }
+
 }

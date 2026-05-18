@@ -82,7 +82,8 @@
     @if (request()->routeIs('register'))
         <script src="{{ asset('js/regiser.js') }}"></script>
     @endif
-
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     {{-- @yield('javascript') --}}
 
 </body>

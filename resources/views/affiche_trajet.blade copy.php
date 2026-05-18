@@ -37,27 +37,8 @@
                         <td>{{ $t->kilometre }} KM</td>
                         <td>{{ $t->kilometre }} KM</td>
                         <td>{{ $t->prix }} Ar</td>
-                        <td>
-                            <p>{{ $t->prix }} Ar</p>
-                            <button 
-                            class="btn btn-primary" 
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#contenu">
-                                Changer
-                            </button>
-                            <div class="collapse" id="contenu">
-                                <input type="number" class="form-control w-50">
-                            </div>
-                        </td>
-                        <td>
-                            {{-- <a class="btn btn-dark" href="{{ route('afficher_trajet', $t->id) }}">
-                                Voir 
-                                <i class="fa fa-eye" aria-hidden="true"></i>
-                            </a> --}}
-                            <a href="" class="btn btn-success">Accepter</a>
-                            {{-- <a href="" class="btn btn-warning">Proposer</a> --}}
-                        </td>
+                        <td>{{ $t->prix }} Ar</td>
+                        <td><a class="btn btn-dark" href="{{ route('afficher_trajet', $t->id) }}">Voir <i class="fa fa-eye" aria-hidden="true"></i></a></td>
                     </tr>
                 @endforeach
                 @endif
@@ -93,18 +74,7 @@
             
         </div>
     @endif
-    {{-- <button class="btn btn-primary" type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#contenu">
-    Afficher / Masquer
-    </button>
-
-    show: pour afficher par défaut
-    <div class="collapse show" id="contenu">
-    <div class="card card-body">
-        Ceci est le contenu caché.
-    </div>
-    </div> --}}
+    
     
 @endsection
 {{-- Role : chauffeur --}}
