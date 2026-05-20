@@ -46,7 +46,7 @@
                 </a>
               </li>    
               <li class="nav-item">
-                <a href="" 
+                <a href="{{ route('trajet') }}" 
                   @class(['nav-link', 'activePers' => request()->routeIs('trajet')])>
                   Trajet
                   <span class="notif_trajet" style="background: red; ">2</span>
@@ -107,4 +107,7 @@
 @endif
 @if (session('demande'))
   <div class="alert alert-info">{{ session('demande') }}</div>
+@endif
+@if (session('chaufRep'))
+  <div class="alert alert-info">{{ session('chaufRep') }}</div>
 @endif

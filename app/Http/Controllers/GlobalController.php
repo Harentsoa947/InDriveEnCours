@@ -188,7 +188,38 @@ class GlobalController extends Controller
 
     public function trajet()
     {
-        return view('trajet');
+        // $trip = Trip::where('user_id', auth()->user()->id)->get();
+        // $request_trip = RequetTrip::where('passager_id', auth()->user()->id);
+        $trip = RequetTrip::where('passager_id', auth()->user()->id)
+            ->with(['trajet', 'chauffeur'])->get();
+
+        return view('trajet', ['trip' => $trip]);
+    }
+
+    public function responseChauffeur(Request $req)
+    {
+        $req->validate([
+            'prixVersBase' => 'required',
+            'idTrajet' => 'required'
+        ], [
+            'prixVersBase.required' => 'Le prix est vide!',
+            'idTrajet.required' => 'Il semble avoir une erreur'
+        ]);
+
+        // dd($req->prixChauf);
+        if($req->prixChauf !== null){
+            $requeste_trip = RequetTrip::find($req->idTrajet);
+            $requeste_trip->prix_chauffeur = $req->prixChauf;
+            $requeste_trip->reponse_chauffeur = false;
+            $requeste_trip->save();
+            return redirect()->route('accueil')->with('chaufRep', 'Réponse envoyer vers le passager');
+        }else{
+            $requeste_trip = RequetTrip::find($req->idTrajet);
+            $requeste_trip->reponse_chauffeur = true;
+            $requeste_trip->save();
+            return redirect()->route('accueil')->with('chaufRep', 'Réponse envoyer vers le passager');
+        }
+        
     }
 
 }

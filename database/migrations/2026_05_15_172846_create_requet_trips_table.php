@@ -27,6 +27,10 @@ return new class extends Migration
             ->nullable()
             ->constrained('trips')
             ->nullOnDelete();
+
+            $table->boolean('reponse_chauffeur')->nullable();
+
+            $table->integer('prix_chauffeur')->nullable();
             
             $table->string('depart');
             $table->string('destination');

@@ -2,10 +2,25 @@
 @section('title', 'Les trajets en attente')
 
 @section('content')
-    {{-- <div id="voi" style="display: none;">{{ $requete }}</div> --}}
-    <div
+    @empty($request_chauffeur)
+        <h1 class="mt-5 text-center">Pas encore de demande pour vous</h1>
+    @else
+    <form action="{{ route('responseChauffeur') }}" method="post">
+        <div
         @class(['container-fluid'])>
         <h1 class="text-center">Les trajets en attente</h1>
+        
+        @if ($errors->any())
+            <div class="alert alert-danger w-25 mx-auto">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li class="diso">{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+        {{-- <div class="alert alert-danger w-25 mx-auto">erreur</div> --}}
+        
         <table class="table mt-5">
             <thead class="thead-dark">
                 <tr>
@@ -15,7 +30,7 @@
                     <th scope="col">Départ - Déstination</th>
                     <th scope="col">Distance du trajet</th>
                     <th scope="col">Distance vers le client</th>
-                    <th scope="col">Prix de base</th>
+                    <th scope="col">Prix</th>
                     <th scope="col">Prix proposé</th>
                     <th>Action</th>
                     {{-- <th scope="col">Confirmation</th> --}}
@@ -25,6 +40,7 @@
                 @foreach ($request_chauffeur as $t)
                     <tr>
                         <td>{{ $t->id }}</td>
+                        <input type="hidden" name="idTrajet" value="{{ $t->id }}">
                         <td><a href="#" style="text-transform: capitalize; text-decoration: none">{{ $t->passager_id }}</a></td>
                         <td>
                             <p>{{ $t->created_at->format('d-m-Y') }}</p> 
@@ -35,34 +51,45 @@
                         </td>
                         <td>{{ $t->disTrajet }} KM</td>
                         <td>{{ $t->Chauf_Pass_Dis }} KM</td>
-                        <td>{{ $t->prixProposer }} Ar</td>
                         <td>
-                            <p>{{ $t->prixProposer }} Ar</p>
+                            {{ $t->prixProposer }} Ar (base) <br>
+                            {{ $t->prixProposer }} Ar (Proposer)
+                        </td>
+                        <td>
+                            <input type="hidden" name="">
+                            <p class="printPrix">{{ $t->prixProposer }} Ar</p>
+                            <input type="hidden" name="prixVersBase" class="prixVersBase" value="{{ $t->prixProposer }}">
+                            <input type="hidden" name="prixChauf" value="" class="chaufPrix">
                             <button 
-                            class="btn btn-primary" 
+                            class="btn btn-primary changement"
                             type="button"
                             data-bs-toggle="collapse"
                             data-bs-target="#contenu">
                                 Changer
                             </button>
                             <div class="collapse" id="contenu">
-                                <input type="number" class="form-control w-50">
+                                <input type="number" class="form-control w-50 prixChauffeur" id="">
                             </div>
                         </td>
                         <td>
-                            {{-- <a class="btn btn-dark" href="{{ route('afficher_trajet', $t->id) }}">
-                                Voir 
-                                <i class="fa fa-eye" aria-hidden="true"></i>
-                            </a> --}}
-                            <a href="" class="btn btn-success">Accepter</a>
-                            {{-- <a href="" class="btn btn-warning">Proposer</a> --}}
+                            <input type="submit" value="Accepter" class="btn btn-success accept" id="">
+                            <input type="hidden" value="Proposer" class="btn btn-warning modife" id="">
+                            <a href="" class="btn btn-danger mt-3">Supprimer</a>
                         </td>
                     </tr>
                 @endforeach
                 
             </tbody>
         </table>
+        
+        
     </div>
+    </form>
+    @endempty
+
+
+
+
     {{-- @if (!empty($id))
         <div class="detail">
             <a href="{{ route('afficher_trajet') }}">
