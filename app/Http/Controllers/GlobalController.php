@@ -196,36 +196,65 @@ class GlobalController extends Controller
         return view('trajet', ['trip' => $trip]);
     }
 
+    // public function responseChauffeur(Request $req)
+    // {
+    //     // dd($req->prixChauf);
+    //     if($req->prixChauf !== null){
+    //         $requeste_trip = RequetTrip::find($req->idTrajet);
+    //         $requeste_trip->prix_chauffeur = $req->prixChauf;
+    //         $requeste_trip->reponse_chauffeur = false;
+    //         $requeste_trip->save();
+    //         return redirect()->route('accueil')->with('chaufRep', 'Réponse envoyer vers le passager');
+    //     }else{
+    //         $requeste_trip = RequetTrip::find($req->idTrajet);
+    //         $requeste_trip->reponse_chauffeur = true;
+    //         $requeste_trip->save();
+    //         return redirect()->route('accueil')->with('chaufRep', 'Réponse envoyer vers le passager');
+    //     }
+        
+    // }
+
     public function responseChauffeur(Request $req)
     {
-        $req->validate([
-            'prixVersBase' => 'required',
-            'idTrajet' => 'required'
-        ], [
-            'prixVersBase.required' => 'Le prix est vide!',
-            'idTrajet.required' => 'Il semble avoir une erreur'
-        ]);
-
-        // dd($req->prixChauf);
-        if($req->prixChauf !== null){
-            $requeste_trip = RequetTrip::find($req->idTrajet);
-            $requeste_trip->prix_chauffeur = $req->prixChauf;
-            $requeste_trip->reponse_chauffeur = false;
-            $requeste_trip->save();
-            return redirect()->route('accueil')->with('chaufRep', 'Réponse envoyer vers le passager');
-        }else{
-            $requeste_trip = RequetTrip::find($req->idTrajet);
-            $requeste_trip->reponse_chauffeur = true;
-            $requeste_trip->save();
-            return redirect()->route('accueil')->with('chaufRep', 'Réponse envoyer vers le passager');
-        }
+        $reponse = RequetTrip::find($req->idReq);
         
+        if($req->action == 'Accepter'){
+            $reponse->reponse_chauffeur = true;
+            // dd('Chauffeur accepte');
+        }elseif($req->action == 'Appliquer modification'){
+            $req->validate([
+                'prixChauf' => 'required'
+            ],[
+                'prixChauf.required' => 'Mettre une prix si vous voulez modifié'
+            ]);
+            $reponse->prix_chauffeur = $req->prixChauf;
+            // dd('Chauffeur modifie prix');
+        }
+        $reponse->save();
+        return redirect()->route('accueil')->with('chaufRep', 'Réponse envoyer vers le passager');
     }
 
     public function envoieReponse($id)
     {
         $requete = RequetTrip::with(['passager'])->find($id);
         return view('envoieReponse', ['requete' => $requete]);
+    }
+
+    public function successTrajet(Request $req)
+    {
+        $trip = Trip::find($req->idTrajet);
+        
+        // dd($otherRequet);
+        $trip->driver_id = $req->chauffeur;
+        $trip->status = 'planifier';
+        $trip->save();
+
+        $otherRequet = RequetTrip::where('trip_id', $req->idTrajet)->get();
+        foreach($otherRequet as $other){
+            $other->delete();
+        }
+
+        return redirect()->route('accueil')->with('successTrajet', 'Attendez votre chauffeur');
     }
 
 }

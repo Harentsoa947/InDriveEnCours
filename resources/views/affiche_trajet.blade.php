@@ -57,14 +57,22 @@
                         </td>
                         
                         <td>
-                            <a href="{{ route('envoieReponse', [$t->id]) }}" class="btn btn-primary">
-                                <i class="fa-solid fa-eye"></i>
-                                Voir
-                            </a><br>
-                            <a href="" class="btn btn-danger mt-3">
-                                <i class="fa-solid fa-x"></i>
-                                Refuser
-                            </a>
+                            {{-- @dd($request_chauffeur) --}}
+                            @if ($t->reponse_chauffeur === true)
+                                <p style="background: grey" class="text-white p-2">En Attente réponse passager...</p>
+                            @elseif($t->reponse_chauffeur === false)
+                                <p style="background: red" class="text-white p-2">Refuser</p>
+                            @else
+                                <a href="{{ route('envoieReponse', [$t->id]) }}" class="btn btn-primary">
+                                    <i class="fa-solid fa-eye"></i>
+                                    Voir
+                                </a><br>
+                                <a href="" class="btn btn-danger mt-3">
+                                    <i class="fa-solid fa-x"></i>
+                                    Refuser
+                                </a>
+                            @endif
+                            
                         </td>
                     </tr>
                 @endforeach

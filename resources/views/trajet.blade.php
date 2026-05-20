@@ -41,7 +41,13 @@
                                 </td>
                                 <td>
                                     @if ($t->reponse_chauffeur === true)
-                                        <input type="submit" value="Choisir" class="btn btn-primary">
+                                        <form action="{{ route('successTrajet') }}" method="post">
+                                            <input type="hidden" name="idTrajet" value="{{ $t->trajet->id }}">
+                                            <input type="hidden" name="chauffeur" value="{{ $t->chauffeur->id }}">
+                                            <input type="submit" value="Choisir" class="btn btn-primary">
+                                            <a href="" class="btn btn-danger">Refuser</a>
+                                        </form>
+                                        
                                     @endif
                                 </td>
                             </tr>

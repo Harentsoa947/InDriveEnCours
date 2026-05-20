@@ -29,6 +29,7 @@ Route::get('/point/chauffeur', [CityController::class, 'point_chauffeur']);
 // Global
 Route::get('/', [GlobalController::class, 'accueil'])->name('accueil');
 Route::get('/trajet', [GlobalController::class, 'trajet'])->name('trajet')->middleware('auth');
+Route::post('successTrajet', [GlobalController::class, 'successTrajet'])->name('successTrajet')->middleware('auth');
 
 // Pour Passager
 Route::get('choix_trajet', [GlobalController::class, 'choix_trajet'])->name('choix_trajet')->middleware('auth');

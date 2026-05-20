@@ -111,3 +111,7 @@
 @if (session('chaufRep'))
   <div class="alert alert-info">{{ session('chaufRep') }}</div>
 @endif
+{{-- successTrajet --}}
+@if (session('successTrajet'))
+  <div class="alert alert-info">{{ session('successTrajet') }}</div>
+@endif
