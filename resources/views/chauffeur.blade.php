@@ -8,6 +8,8 @@
     </div>
     <div class="container mt-4">
         <div class="row">
+            <input type="hidden" name="" id="latUser" value="{{ $lat }}">
+            <input type="hidden" name="" id="lonUser" value="{{ $long }}">
             <div class="col-lg-6 ">
                 <ul>
                     <div style="display: none;">
@@ -35,8 +37,13 @@
                         </ul>
                     </li>
                 </ul>
-                <h5 style="border-top: 2px solid #000" class="pt-5">Nom de l'endroit où se trouve le chauffeur:</h5>
+                <h5 class="pt-3" style="border-top: 2px solid #000">Distance entre vous et le chauffeur: </h5>
+                <p>{{ $distance }}</p>
+                <h5">Chauffeur:</h5>
                 <p class="position"></p>
+
+                <h5>Votre point de départ:</h5>
+                <p>{{ $userPlace }}</p>
             </div>
             <div class="col-lg-6">
                 <div id="map"></div>

@@ -4,7 +4,7 @@
 @section('content')
     <div id="voi" style="display: none;">{{ $requete }}</div>
     <div
-        @class(['container-fluid', 'principal' => !empty($id)])>
+        @class(['container-fluid'])>
         <h1 class="text-center">Les trajets en attente</h1>
         <table class="table mt-5">
             <thead class="thead-dark">
@@ -22,7 +22,6 @@
                 </tr>
             </thead>
             <tbody>
-                @if (empty($id))
                 @foreach ($trips as $t)
                     <tr>
                         <td>{{ $t->id }}</td>
@@ -60,7 +59,6 @@
                         </td>
                     </tr>
                 @endforeach
-                @endif
                 
             </tbody>
         </table>

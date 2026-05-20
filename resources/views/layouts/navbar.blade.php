@@ -103,5 +103,8 @@
     <div class="alert alert-info">{{ session('etat') }}</div>
 @endif
 @if (session('inscrit'))
-<div class="alert alert-info">{{ session('inscrit') }}</div>
+  <div class="alert alert-info">{{ session('inscrit') }}</div>
+@endif
+@if (session('demande'))
+  <div class="alert alert-info">{{ session('demande') }}</div>
 @endif

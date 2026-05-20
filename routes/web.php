@@ -37,7 +37,8 @@ Route::post('/new_trajet', [GlobalController::class, 'new_trajet'])->name('new_t
 Route::get('/confirmation/{validation?}', [GlobalController::class, 'confirmation'])->name('confirmation')->middleware('auth');
 Route::post('/envoyeDemande', [GlobalController::class, 'envoyeDemande'])->name('envoyeDemande')->middleware('auth');
 
-Route::get('chauffeur/{id}', [GlobalController::class, 'chauffeur'])->name('chauffeur');
+
 
 // Pour Chauffeur
+Route::get('chauffeur/{id}/{lat}/{long}/{depart}/{distance}', [GlobalController::class, 'chauffeur'])->name('chauffeur');
 Route::get('/afficher_trajet/{id?}', [GlobalController::class, 'afficher_trajet'])->name('afficher_trajet')->middleware('auth');

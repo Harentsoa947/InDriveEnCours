@@ -106,12 +106,16 @@
                 </thead>
                 <tbody>
                     @foreach ($chauffeur as $ch)
-                        {{-- if $ch->distance < 5 --}}
-                        {{-- affichage --}}
-                        
+
                         <tr id="ch{{ $ch->id }}" class="all_chauf">
                             <td class="affID">
-                                <a href="{{ url('chauffeur/'.$ch->id) }}">{{ $ch->id }}</a>
+                                <a href="{{ route('chauffeur', [
+                                    'id' => $ch->id,
+                                    'lat' => $reservation->latDep,
+                                    'long' => $reservation->lonDep,
+                                    'depart' => $reservation->depart,
+                                    'distance' => $ch->distance
+                                ]) }}">{{ $ch->id }}</a>
                             </td>
                             <td>{{ $ch->name }}</td>
                             <td>{{ $ch->typeVoiture->type }}</td>
@@ -135,9 +139,10 @@
                                     {{ $ch->distance }} KM
                                 </td>
                             <td>
-                                <input type="checkbox" name="chauffeur[]" value="{{ $ch->id }}" id="">
+                                <input type="checkbox" name="chauffeur[]" value="{{ $ch->id }}">
+                                <input type="hidden" name="Chauf_Passager[{{ $ch->id }}]" value="{{ $ch->distance }}">
                             </td>
-                            <input type="hidden" name="Chauf_Passager" value="{{ $ch->distance }}">
+                            
                         </tr>    
                     @endforeach
                     

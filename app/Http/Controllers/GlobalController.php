@@ -28,16 +28,11 @@ class GlobalController extends Controller
     // {
     //     return view('choix_trajet');
     // }
-    public function afficher_trajet($id = null)
+    public function afficher_trajet()
     {
-        if($id){
-            $trip = Trip::findOrFail($id);
-            $requete = RequetTrip::where('chauffeur_id', auth()->user()->id)->count();
-            return view('affiche_trajet', ['trip' => $trip, 'id' =>$id, 'requete' => $requete]);
-        }
         $trips = Trip::with('user')->get();
         $requete = RequetTrip::where('chauffeur_id', auth()->user()->id)->count();
-        return view('affiche_trajet', ['trips' => $trips, 'id'=> $id, 'requete' => $requete]);
+        return view('affiche_trajet', ['trips' => $trips, 'requete' => $requete]);
     }
     public function new_trajet(Request $req)
     {
@@ -80,6 +75,7 @@ class GlobalController extends Controller
             return redirect()->route('accueil');
         }
         $reservation = Trip::where('user_id', auth()->id())
+            ->with('user')
             ->latest()
             ->first();
 
@@ -99,8 +95,7 @@ class GlobalController extends Controller
                 );
             }
         }
-
-
+        
         return view('confirmation_trajet', [
             'reservation' => $reservation,
             'chauffeur' => $chauffeur
@@ -151,20 +146,29 @@ class GlobalController extends Controller
             $demande->destination = $req->input('des');
             $demande->disTrajet = $req->input('disTrajet');
             $demande->prixProposer = $req->input('prixProposer');
-            $demande->Chauf_Pass_Dis = $req->input('Chauf_Passager');
+
+            $demande->Chauf_Pass_Dis = $req->Chauf_Passager[$id] ?? null;
+
             $demande->trip_id = $req->input('idTrip');
             $demande->save();
         }
         
-        return redirect()->route('accueil');
+        return redirect()->route('accueil')->with('demande', 'Demande envoyer vers les chauffeurs');
     }
 
-    public function chauffeur($id)
+    public function chauffeur($id, $lat, $long, $userPlace, $distance)
     {
         // with : relation, besoin d'un méthode dans le modèle user
         $chauffeur = User::with(['typeVoiture', 'localChauf'])->find($id);
+        // dd($lat);
         // Utilisation : {{ $chauffeur->typeVoiture->nom }}
-        return view('chauffeur', ['chauffeur' => $chauffeur]);
+        return view('chauffeur', [
+            'chauffeur' => $chauffeur,
+            'lat' => $lat,
+            'long' => $long,
+            'userPlace' => $userPlace,
+            'distance' => $distance
+        ]);
     }
 
     public function trajet()
