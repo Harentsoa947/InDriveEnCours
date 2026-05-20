@@ -5,7 +5,7 @@
     @empty($request_chauffeur)
         <h1 class="mt-5 text-center">Pas encore de demande pour vous</h1>
     @else
-    <form action="{{ route('responseChauffeur') }}" method="post">
+    {{-- <form action="" method="post"> --}}
         <div
         @class(['container-fluid'])>
         <h1 class="text-center">Les trajets en attente</h1>
@@ -31,7 +31,7 @@
                     <th scope="col">Distance du trajet</th>
                     <th scope="col">Distance vers le client</th>
                     <th scope="col">Prix</th>
-                    <th scope="col">Prix proposé</th>
+                    {{-- <th scope="col">Prix proposé</th> --}}
                     <th>Action</th>
                     {{-- <th scope="col">Confirmation</th> --}}
                 </tr>
@@ -40,7 +40,7 @@
                 @foreach ($request_chauffeur as $t)
                     <tr>
                         <td>{{ $t->id }}</td>
-                        <input type="hidden" name="idTrajet" value="{{ $t->id }}">
+                        {{-- <input type="hidden" name="idTrajet" value="{{ $t->id }}"> --}}
                         <td><a href="#" style="text-transform: capitalize; text-decoration: none">{{ $t->passager_id }}</a></td>
                         <td>
                             <p>{{ $t->created_at->format('d-m-Y') }}</p> 
@@ -55,26 +55,16 @@
                             {{ $t->prixProposer }} Ar (base) <br>
                             {{ $t->prixProposer }} Ar (Proposer)
                         </td>
+                        
                         <td>
-                            <input type="hidden" name="">
-                            <p class="printPrix">{{ $t->prixProposer }} Ar</p>
-                            <input type="hidden" name="prixVersBase" class="prixVersBase" value="{{ $t->prixProposer }}">
-                            <input type="hidden" name="prixChauf" value="" class="chaufPrix">
-                            <button 
-                            class="btn btn-primary changement"
-                            type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#contenu">
-                                Changer
-                            </button>
-                            <div class="collapse" id="contenu">
-                                <input type="number" class="form-control w-50 prixChauffeur" id="">
-                            </div>
-                        </td>
-                        <td>
-                            <input type="submit" value="Accepter" class="btn btn-success accept" id="">
-                            <input type="hidden" value="Proposer" class="btn btn-warning modife" id="">
-                            <a href="" class="btn btn-danger mt-3">Supprimer</a>
+                            <a href="{{ route('envoieReponse', [$t->id]) }}" class="btn btn-primary">
+                                <i class="fa-solid fa-eye"></i>
+                                Voir
+                            </a><br>
+                            <a href="" class="btn btn-danger mt-3">
+                                <i class="fa-solid fa-x"></i>
+                                Refuser
+                            </a>
                         </td>
                     </tr>
                 @endforeach
@@ -84,7 +74,7 @@
         
         
     </div>
-    </form>
+    {{-- </form> --}}
     @endempty
 
 

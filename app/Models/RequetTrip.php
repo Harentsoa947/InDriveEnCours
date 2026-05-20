@@ -19,6 +19,11 @@ class RequetTrip extends Model
         return $this->belongsTo(User::class, 'chauffeur_id');
     }
 
+    public function passager()
+    {
+        return $this->belongsTo(User::class, 'passager_id');
+    }
+
     protected $casts = [
         'reponse_chauffeur' => 'boolean',
     ];

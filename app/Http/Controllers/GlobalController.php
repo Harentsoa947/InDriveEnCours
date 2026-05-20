@@ -222,4 +222,10 @@ class GlobalController extends Controller
         
     }
 
+    public function envoieReponse($id)
+    {
+        $requete = RequetTrip::with(['passager'])->find($id);
+        return view('envoieReponse', ['requete' => $requete]);
+    }
+
 }

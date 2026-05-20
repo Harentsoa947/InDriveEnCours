@@ -42,4 +42,5 @@ Route::post('/envoyeDemande', [GlobalController::class, 'envoyeDemande'])->name(
 // Pour Chauffeur
 Route::get('chauffeur/{id}/{lat}/{long}/{depart}/{distance}', [GlobalController::class, 'chauffeur'])->name('chauffeur');
 Route::get('/afficher_trajet/{id?}', [GlobalController::class, 'afficher_trajet'])->name('afficher_trajet')->middleware('auth');
+Route::get('envoieReponse/{id}', [GlobalController::class, 'envoieReponse'])->name('envoieReponse')->middleware('auth');
 Route::post('responseChauffeur', [GlobalController::class, 'responseChauffeur'])->name('responseChauffeur');
