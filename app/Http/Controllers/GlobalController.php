@@ -30,9 +30,24 @@ class GlobalController extends Controller
     // }
     public function afficher_trajet()
     {
-        $trips = Trip::with('user')->get();
-        $requete = RequetTrip::where('chauffeur_id', auth()->user()->id)->count();
-        return view('affiche_trajet', ['trips' => $trips, 'requete' => $requete]);
+        $request_trip = RequetTrip::get();
+        
+        $request_chauffeur = [];
+
+        foreach($request_trip as $req){
+            if($req->chauffeur_id === auth()->user()->id){
+                array_push($request_chauffeur, $req);
+            }
+        }
+        
+        if(empty($request_chauffeur)){
+            // dd("Pas de commande pour vous");
+            return view('affiche_trajet', ['request_chauffeur' => $request_chauffeur ]);
+        }else{
+            // dd($request_chauffeur);
+            return view('affiche_trajet', ['request_chauffeur' => $request_chauffeur ]);
+        }
+        
     }
     public function new_trajet(Request $req)
     {

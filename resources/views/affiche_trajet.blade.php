@@ -2,7 +2,7 @@
 @section('title', 'Les trajets en attente')
 
 @section('content')
-    <div id="voi" style="display: none;">{{ $requete }}</div>
+    {{-- <div id="voi" style="display: none;">{{ $requete }}</div> --}}
     <div
         @class(['container-fluid'])>
         <h1 class="text-center">Les trajets en attente</h1>
@@ -22,10 +22,10 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($trips as $t)
+                @foreach ($request_chauffeur as $t)
                     <tr>
                         <td>{{ $t->id }}</td>
-                        <td><a href="#" style="text-transform: capitalize; text-decoration: none">{{ $t->user->name }}</a></td>
+                        <td><a href="#" style="text-transform: capitalize; text-decoration: none">{{ $t->passager_id }}</a></td>
                         <td>
                             <p>{{ $t->created_at->format('d-m-Y') }}</p> 
                             <p>{{ $t->created_at->format('H:i') }}</td></p>
@@ -33,11 +33,11 @@
                             <p>{{ $t->depart }}</p>
                             <p>{{ $t->destination }}</p>
                         </td>
-                        <td>{{ $t->kilometre }} KM</td>
-                        <td>{{ $t->kilometre }} KM</td>
-                        <td>{{ $t->prix }} Ar</td>
+                        <td>{{ $t->disTrajet }} KM</td>
+                        <td>{{ $t->Chauf_Pass_Dis }} KM</td>
+                        <td>{{ $t->prixProposer }} Ar</td>
                         <td>
-                            <p>{{ $t->prix }} Ar</p>
+                            <p>{{ $t->prixProposer }} Ar</p>
                             <button 
                             class="btn btn-primary" 
                             type="button"
@@ -63,12 +63,11 @@
             </tbody>
         </table>
     </div>
-    @if (!empty($id))
+    {{-- @if (!empty($id))
         <div class="detail">
             <a href="{{ route('afficher_trajet') }}">
                 <i class="fa-solid fa-x" style="color: red; font-weight: bold; font-size: 30px; position: absolute; right: 20px; cursor: pointer"></i>
             </a>
-            {{-- @dd($trip) --}}
             <div class="mt-5 px-3">
                 <h3 class="text-center">Info sur le trajet</h3>
                 <h5 class="text-center">({{ $trip->kilometre }} Km / Prix par défault : {{ $trip->prix }} Ar)</h5>
@@ -90,7 +89,7 @@
             </div>
             
         </div>
-    @endif
+    @endif --}}
     {{-- <button class="btn btn-primary" type="button"
             data-bs-toggle="collapse"
             data-bs-target="#contenu">

@@ -38,8 +38,8 @@
                     </li>
                 </ul>
                 <h5 class="pt-3" style="border-top: 2px solid #000">Distance entre vous et le chauffeur: </h5>
-                <p>{{ $distance }}</p>
-                <h5">Chauffeur:</h5>
+                <p>{{ $distance }} KM</p>
+                <h5>Chauffeur:</h5>
                 <p class="position"></p>
 
                 <h5>Votre point de départ:</h5>
