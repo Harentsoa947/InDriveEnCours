@@ -4,10 +4,17 @@
 
 @section('content')
 <form action="" method="POST">
-    @if ($requete)
+    {{-- @if ($requete)
         <div id="voi" style="display: none;">{{ $requete }}</div>    
-    @endif
+    @endif --}}
     
+    @if($trip)
+        <div style="background:#A7E92F;" class="mt-3 w-25 mx-auto text-center">
+            <a href="{{ route('maintenant', ['id' => $trip->id]) }}" class="text-white py-5" style="text-decoration: none;font-size: 30px; font-weight: bold; cursor: pointer">Vous avez du travail</a>
+        </div>
+        
+    @endif
+
     <div class="container" style="margin: 60px auto;">
         <div class="row">
             <div class="col-lg-6 d-flex justify-content-center justify-content-lg-start">

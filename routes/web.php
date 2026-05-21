@@ -45,3 +45,4 @@ Route::get('chauffeur/{id}/{lat}/{long}/{depart}/{distance}', [GlobalController:
 Route::get('/afficher_trajet/{id?}', [GlobalController::class, 'afficher_trajet'])->name('afficher_trajet')->middleware('auth');
 Route::get('envoieReponse/{id}', [GlobalController::class, 'envoieReponse'])->name('envoieReponse')->middleware('auth');
 Route::post('responseChauffeur', [GlobalController::class, 'responseChauffeur'])->name('responseChauffeur');
+Route::get('maintenant/{id}', [GlobalController::class, 'maintenant'])->name('maintenant');

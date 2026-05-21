@@ -13,12 +13,31 @@ class GlobalController extends Controller
 {
     public function accueil(){
         $requete = null;
+        // Notifictions:
+        // if(Auth::check() && auth()->user()->role == 'Chauffeur'){
+        //     $requete = RequetTrip::where('chauffeur_id', auth()->user()->id)->count();
+        //     return view('accueil', ['requete' => $requete]);
+        // }
+        // Trajet maintenant
+        $trip = null;
         if(Auth::check() && auth()->user()->role == 'Chauffeur'){
-            $requete = RequetTrip::where('chauffeur_id', auth()->user()->id)->count();
-            return view('accueil', ['requete' => $requete]);
+            $trip = Trip::where([
+                ['driver_id', auth()->user()->id], 
+                ['status', 'planifier']
+            ])->latest()->first();
+            // if(!empty($trip)){
+            //     return view('accueil', ['trip' => $trip]);
+            // }
         }
-        return view('accueil', ['requete' => $requete]);
+        return view('accueil', ['trip' => $trip]);
     }
+
+    public function maintenant($id)
+    {
+        $trip = Trip::with(['driver.localChauf'])->find($id);
+        return view('maintenant', ['trip' => $trip]);
+    }
+
     public function choix_trajet()
     {
         return view('choix_trajet');

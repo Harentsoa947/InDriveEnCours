@@ -1,9 +1,13 @@
+// Chauffeur
 let lat = document.querySelector('.latitude').textContent
 let lng = document.querySelector('.longitude').textContent
 
-
+// Passager
 let latUser = document.querySelector('#latUser').value
 let lonUser = document.querySelector('#lonUser').value
+
+console.log(lat);
+console.log(lng);
 
 fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`)
     .then(response => response.json())
@@ -16,15 +20,17 @@ fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${
 
         var marker = L.marker([lat, lng], {icon: greenIcon}).addTo(map)
 
+        // Chauffeur
         marker.bindTooltip('Chauffeur', {
             permanent: true,
             direction: "top",
             offset: [0, -30]
         })
 
+        // Passager
         var pointUser = L.marker([latUser, lonUser]).addTo(map)
 
-        pointUser.bindTooltip('Vous', {
+        pointUser.bindTooltip('Passager', {
             permanent: true,
             direction: "top"
         })
