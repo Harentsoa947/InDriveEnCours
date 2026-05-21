@@ -33,9 +33,10 @@
                                 <td>
                                     @if ($t->reponse_chauffeur === true)
                                         <p style="background: green;" class="text-center text-white py-2">Demande acceptée</p>
-                                    @elseif ($t->reponse_chauffeur === false)
-                                    <p style="background: red;" class="text-center text-white py-2 px-1">Demande refusée</p>
+                                    @elseif ($t->prix_chauffeur != null)
+                                    <p style="background: rgb(17, 0, 255);" class="text-center text-white py-2 px-1">{{ $t->prix_chauffeur }} Ar</p>
                                     @else
+                                        {{-- Refys --}}
                                         <p>En attente...</p>
                                     @endif
                                 </td>
@@ -47,7 +48,9 @@
                                             <input type="submit" value="Choisir" class="btn btn-primary">
                                             <a href="" class="btn btn-danger">Refuser</a>
                                         </form>
-                                        
+                                    @elseif ($t->prix_chauffeur != null)
+                                        <input type="submit" value="Accepter prix" class="btn btn-primary">
+                                        <a href="" class="btn btn-danger">Refuser</a>
                                     @endif
                                 </td>
                             </tr>

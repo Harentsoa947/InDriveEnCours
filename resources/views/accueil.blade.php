@@ -8,11 +8,14 @@
         <div id="voi" style="display: none;">{{ $requete }}</div>    
     @endif --}}
     
-    @if($trip)
+    @if($trip && $who == 'chauf')
         <div style="background:#A7E92F;" class="mt-3 w-25 mx-auto text-center">
             <a href="{{ route('maintenant', ['id' => $trip->id]) }}" class="text-white py-5" style="text-decoration: none;font-size: 30px; font-weight: bold; cursor: pointer">Vous avez du travail</a>
         </div>
-        
+    @else
+        <div style="background:#A7E92F;" class="mt-3 w-25 mx-auto text-center">
+            <a href="#" class="text-white py-5" style="text-decoration: none;font-size: 30px; font-weight: bold; cursor: pointer">Le chauffeur est en cours ...</a>
+        </div>
     @endif
 
     <div class="container" style="margin: 60px auto;">

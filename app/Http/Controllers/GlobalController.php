@@ -20,22 +20,49 @@ class GlobalController extends Controller
         // }
         // Trajet maintenant
         $trip = null;
+        $who = null;
         if(Auth::check() && auth()->user()->role == 'Chauffeur'){
             $trip = Trip::where([
                 ['driver_id', auth()->user()->id], 
                 ['status', 'planifier']
             ])->latest()->first();
-            // if(!empty($trip)){
-            //     return view('accueil', ['trip' => $trip]);
-            // }
+            $who = 'chauf';
         }
-        return view('accueil', ['trip' => $trip]);
+        if(Auth::check() && auth()->user()->role == 'Passager'){
+            $trip = Trip::where([
+                ['user_id', auth()->user()->id], 
+                ['status', 'planifier']
+            ]);
+            $who = 'pass';
+        }
+        return view('accueil', [
+            'trip' => $trip,
+            'who' => $who
+        ]);
     }
 
     public function maintenant($id)
     {
         $trip = Trip::with(['driver.localChauf'])->find($id);
         return view('maintenant', ['trip' => $trip]);
+    }
+
+    public function prevenirPassager(Request $req)
+    {
+        $trip = Trip::with(['driver.localChauf'])->find($req->trajet);
+        if($req->action == 'Allez vers le passager'){
+            $trip->status = 'driversVersPassager';
+        }elseif($req->action == 'Arriver au point du passager'){
+            $trip->status = 'AttentePass';
+        }elseif($req->action == 'Commencer le trajet'){
+            $trip->status = 'InTrajet';
+        }elseif($req->action == 'Fini'){
+            return redirect(route('accueil'));
+        }
+        
+        $trip->save();
+        // return view('maintenant', ['trip' => $trip]);
+        return redirect()->route('maintenant', $trip->id);
     }
 
     public function choix_trajet()

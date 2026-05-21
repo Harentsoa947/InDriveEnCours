@@ -19,7 +19,22 @@
                 <p>Départ: {{ $trip->depart }}</p>
                 <p>Déstination: {{ $trip->destination }}</p>
                 <p>Distance du trajet: {{ $trip->kilometre }} KM</p>
-                <button class="btn btn-primary">Allez vers le passager</button>
+                <form action="{{ route('prevenirPassager') }}" method="post">
+                    @csrf
+                    <input type="hidden" name="trajet" value="{{ $trip->id }}">
+                    @if ($trip->status == 'planifier')
+                        <input type="submit" value="Allez vers le passager" class="btn btn-primary" name="action">
+                    @elseif($trip->status == 'driversVersPassager')
+                        <input type="submit" value="Arriver au point du passager" class="btn btn-warning" name="action">
+                    @elseif($trip->status == 'AttentePass')
+                        <input type="submit" value="Commencer le trajet" class="btn btn-secondary" name="action">
+                    @elseif($trip->status == 'InTrajet')
+                        <input type="submit" value="Fini" class="btn btn-danger" name="action">
+                    @endif
+                    
+                    
+                </form>
+                
             </div>
             <div class="col-lg-6">
                 <div id="map"></div>
