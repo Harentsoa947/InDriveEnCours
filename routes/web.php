@@ -34,6 +34,8 @@ Route::post('successTrajet', [GlobalController::class, 'successTrajet'])->name('
 // Pour Passager
 Route::get('choix_trajet', [GlobalController::class, 'choix_trajet'])->name('choix_trajet')->middleware('auth');
 Route::post('/new_trajet', [GlobalController::class, 'new_trajet'])->name('new_trajet')->middleware('auth');
+Route::get('note/{id}', [GlobalController::class, 'note'])->name('note')->middleware('auth');
+Route::post('notes', [GlobalController::class, 'notes'])->name('notes');
 
 Route::get('/confirmation/{validation?}', [GlobalController::class, 'confirmation'])->name('confirmation')->middleware('auth');
 Route::post('/envoyeDemande', [GlobalController::class, 'envoyeDemande'])->name('envoyeDemande')->middleware('auth');

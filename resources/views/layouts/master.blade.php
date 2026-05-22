@@ -27,6 +27,12 @@
     @if (request()->routeIs('confirmation'))
         <link rel="stylesheet" href="{{ asset('css/confirmation.css') }}">
     @endif
+
+    @if (request()->routeIs('note'))
+        <link rel="stylesheet" href="{{ asset('css/note.css') }}">
+        <script src="{{ asset('js/note.js') }}" defer></script>
+    @endif
+
     @if (request()->routeIs('chauffeur') || request()->routeIs('maintenant'))
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
             integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="

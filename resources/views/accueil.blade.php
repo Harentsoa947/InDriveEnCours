@@ -4,19 +4,34 @@
 
 @section('content')
 <form action="" method="POST">
-    {{-- @if ($requete)
-        <div id="voi" style="display: none;">{{ $requete }}</div>    
-    @endif --}}
+    @isset($trip1)
+        @if($trip1 && $who == 'chauf')
+            <div style="background:#A7E92F;" class="mt-3 w-25 mx-auto text-center">
+                <a href="{{ route('maintenant', ['id' => $trip1->id]) }}" class="text-white py-5" style="text-decoration: none;font-size: 30px; font-weight: bold; cursor: pointer">{{ $message }}</a>
+            </div>
+        @elseif($trip1 && $who == 'pass' && $trip1->status == 'planifier')
+            <div style="background:#A7E92F;" class="mt-3 w-50 mx-auto text-center py-3">
+                <a href="#" class="text-white py-5" style="text-decoration: none;font-size: 30px; font-weight: bold; cursor: pointer">Votre trajet est confirmer, attendez le chauffeur</a>
+            </div>
+        @elseif($trip1 && $who == 'pass' && $trip1->status == 'driversVersPassager')
+            <div style="background:#280dd3;" class="mt-3 w-50 mx-auto text-center py-3">
+                <a href="#" class="text-white py-5" style="text-decoration: none;font-size: 30px; font-weight: bold; cursor: pointer">Le chauffeur va vers vous ...</a>
+            </div>
+        @elseif($trip1 && $who == 'pass' && $trip1->status == 'AttentePass')
+            <div style="background:#ee4d0d;" class="mt-3 w-50 mx-auto text-center py-3">
+                <a href="#" class="text-white py-5" style="text-decoration: none;font-size: 30px; font-weight: bold; cursor: pointer">Le chauffeur est là</a>
+            </div>
+        @elseif($trip1 && $who == 'pass' && $trip1->status == 'InTrajet')
+            <div style="background:#686462;" class="mt-3 w-50 mx-auto text-center py-3">
+                <a href="#" class="text-white py-5" style="text-decoration: none;font-size: 30px; font-weight: bold; cursor: pointer">Vous êtes sur le trajet</a>
+            </div>
+            @elseif($trip1 && $who == 'pass' && $trip1->status == 'Fini')
+            <div style="background: yellow;" class="mt-3 w-50 mx-auto text-center py-3">
+                <a href="{{ route('note', ['id' => $trip1->id]) }}" class="text-white py-5" style="text-decoration: none;font-size: 30px; font-weight: bold; cursor: pointer">Notez le chauffeur</a>
+            </div>
+        @endif
+    @endisset
     
-    @if($trip && $who == 'chauf')
-        <div style="background:#A7E92F;" class="mt-3 w-25 mx-auto text-center">
-            <a href="{{ route('maintenant', ['id' => $trip->id]) }}" class="text-white py-5" style="text-decoration: none;font-size: 30px; font-weight: bold; cursor: pointer">Vous avez du travail</a>
-        </div>
-    @else
-        <div style="background:#A7E92F;" class="mt-3 w-25 mx-auto text-center">
-            <a href="#" class="text-white py-5" style="text-decoration: none;font-size: 30px; font-weight: bold; cursor: pointer">Le chauffeur est en cours ...</a>
-        </div>
-    @endif
 
     <div class="container" style="margin: 60px auto;">
         <div class="row">

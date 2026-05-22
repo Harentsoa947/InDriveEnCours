@@ -1,0 +1,22 @@
+.etoile{
+    background: red;
+    width: 50%;
+    margin: 0 auto;
+    position: relative;
+}
+.etoile i{
+    color: #fff;
+    padding: 10px 5px;
+    font-size: 30px;
+    cursor: pointer;
+}
+.ss{
+    color: yellow !important;
+}
+.ignor{
+    position: absolute;
+    bottom: 5px;
+    right: 22px;
+    /* color: #fff; */
+    /* font-size: 20px; */
+}

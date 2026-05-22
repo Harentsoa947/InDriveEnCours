@@ -19,25 +19,39 @@ class GlobalController extends Controller
         //     return view('accueil', ['requete' => $requete]);
         // }
         // Trajet maintenant
-        $trip = null;
+        $trip1 = null;
         $who = null;
+        $message = null;
         if(Auth::check() && auth()->user()->role == 'Chauffeur'){
-            $trip = Trip::where([
-                ['driver_id', auth()->user()->id], 
-                ['status', 'planifier']
-            ])->latest()->first();
+            $trip1 = Trip::where('driver_id', auth()->user()->id)
+                ->whereNotIn('status', ['pending', 'Fini'])
+                ->latest()->first();
             $who = 'chauf';
+            if(empty($trip1)){
+                return view('accueil');
+            }
+            if($trip1->status == 'planifier'){
+                $message = 'Vous avez du traveil';
+            }elseif($trip1->status == 'driversVersPassager'){
+                $message = "Vous avez êtes en train d'aller vers le passager";
+            }elseif($trip1->status == 'AttentePass'){
+                $message = 'Attendez le Passager';
+            }elseif($trip1->status == 'InTrajet'){
+                $message = 'Allez ici si le trajet est fini';
+            }
         }
         if(Auth::check() && auth()->user()->role == 'Passager'){
-            $trip = Trip::where([
-                ['user_id', auth()->user()->id], 
-                ['status', 'planifier']
-            ]);
+            // $trip = Trip::where([
+            //     ['user_id', auth()->user()->id], 
+            //     ['status', 'planifier']
+            // ])->latest()->first();
+            $trip1 = Trip::where('user_id', auth()->user()->id)->latest()->first();
             $who = 'pass';
         }
         return view('accueil', [
-            'trip' => $trip,
-            'who' => $who
+            'trip1' => $trip1,
+            'who' => $who,
+            'message' => $message
         ]);
     }
 
@@ -45,6 +59,23 @@ class GlobalController extends Controller
     {
         $trip = Trip::with(['driver.localChauf'])->find($id);
         return view('maintenant', ['trip' => $trip]);
+    }
+
+    public function note($id)
+    {
+        $trip = Trip::with(['driver'])->find($id);
+        return view('note', ['trip' => $trip]);
+    }
+
+    public function notes(Request $req)
+    {
+        // dd($req->retourPassa);
+        $trip = Trip::find($req->input('idTrajet'));
+        $trip->note = $req->input('retourPassa');
+        $trip->status = 'EndTrajet';
+        $trip->save();
+        // dd($trip);
+        return redirect(route('accueil'));
     }
 
     public function prevenirPassager(Request $req)
@@ -57,6 +88,8 @@ class GlobalController extends Controller
         }elseif($req->action == 'Commencer le trajet'){
             $trip->status = 'InTrajet';
         }elseif($req->action == 'Fini'){
+            $trip->status = 'Fini';
+            $trip->save();
             return redirect(route('accueil'));
         }
         
