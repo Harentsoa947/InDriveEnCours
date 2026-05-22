@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
@@ -33,34 +34,48 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            // $request->validate([
-            'name' => ['required', 'string', 'max:25', 'min:5', 'unique:users,name'],
-            // 'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
-            'numero_phone' => ['required'],
-            'role' => ['required', 'string'],
-
-            'marque_voiture' => ['required_if:role,Chauffeur'],
-            'typeV' => ['required_if:role,Chauffeur'],
-            'electrique' => ['required_if:role,Chauffeur'],
-
-            'password' => ['required', 'confirmed'],
-            // 'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'name' => [
+                'required', 
+                'string', 
+                'min:5', 
+                'max:13', 
+                'unique:users,name',
+                'regex:/^[a-zA-ZÀ-ÿ\s\-]+$/' // Uniquement lettres, accents, espaces et tirets
+            ],
+            'numero_phone' => [
+                'required',
+                'regex:/^\+?[0-9\s\-]{8,15}$/' // Entre 8 et 15 chiffres, accepte le + au début
+            ],
+            'role' => ['required', 'string', 'in:Chauffeur,Passager'], // "in" restreint les rôles valides
+        
+            'marque_voiture' => ['required_if:role,Chauffeur', 'nullable', 'string', 'max:50'],
+            'typeV' => ['required_if:role,Chauffeur', 'nullable', 'string'],
+            'electrique' => ['required_if:role,Chauffeur', 'nullable', 'boolean'], // 'boolean' car c'est souvent un oui/non (0 ou 1)
+        
+            'password' => ['required', 'confirmed', Password::min(8)->letters()->numbers()], // Plus sécurisé
         ], [
-            'name.required' => 'Remplissez votre nom',
-            'name.string' => 'Votre nom n\'est pas valide',
-            'name.max' => 'Votre nom est trop long',
-            'name.min' => 'Votre nom est trop court',
-            'name.unique' => 'Ce nom existe déja',
-            'role.required' => 'Vous devez avoir une rôle',
-
-            'marque_voiture.required_if' => 'Veuillez entré le marque du voiture',
-            'typeV.required_if' => 'Selectionnez le type du voiture',
-            'electrique.required_if' => 'Votre voiture est électrique ou pas?',
-
-            'numero_phone.required' => 'Vous devez entre une numéro de téléphone',
-            // 'email.required' => 'Champ email obligatoire',
-            'password.required' => 'Créer votre propre de mots de passe',
-            'password.confirmed' => 'Le mots de passe est différent'
+            'name.required' => 'Remplissez votre nom.',
+            'name.string' => "Votre nom n'est pas valide.",
+            'name.max' => 'Votre nom est trop long (maximum 13 caractères).',
+            'name.min' => 'Votre nom est trop court (minimum 5 caractères).',
+            'name.unique' => 'Ce nom existe déjà.',
+            'name.regex' => 'Le nom ne doit contenir que des lettres, des espaces ou des tirets.',
+        
+            'role.required' => 'Vous devez choisir un rôle.',
+            'role.in' => 'Le rôle sélectionné n’est pas valide.',
+        
+            'marque_voiture.required_if' => 'Veuillez entrer la marque de la voiture.',
+            'typeV.required_if' => 'Sélectionnez le type de la voiture.',
+            'electrique.required_if' => 'Votre voiture est-elle électrique ou pas ?',
+        
+            'numero_phone.required' => 'Vous devez entrer un numéro de téléphone.',
+            'numero_phone.regex' => 'Le format du numéro de téléphone n\'est pas valide.',
+        
+            'password.required' => 'Créez votre mot de passe.',
+            'password.confirmed' => 'La confirmation du mot de passe ne correspond pas.',
+            'password.min' => 'Le mot de passe doit contenir au moins 8 caractères.',
+            'password.letters' => 'Le mot de passe doit contenir au moins une lettre.',
+            'password.numbers' => 'Le mot de passe doit contenir au moins un chiffre.',
         ]);
         
         if($request->electrique === 'true'){
