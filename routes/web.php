@@ -30,6 +30,7 @@ Route::get('/point/chauffeur', [CityController::class, 'point_chauffeur']);
 Route::get('/', [GlobalController::class, 'accueil'])->name('accueil');
 Route::get('/trajet', [GlobalController::class, 'trajet'])->name('trajet')->middleware('auth');
 Route::post('successTrajet', [GlobalController::class, 'successTrajet'])->name('successTrajet')->middleware('auth');
+Route::get('historique', [GlobalController::class, 'historique'])->name('historique')->middleware('auth');
 
 // Pour Passager
 Route::get('choix_trajet', [GlobalController::class, 'choix_trajet'])->name('choix_trajet')->middleware('auth');
@@ -49,3 +50,5 @@ Route::get('envoieReponse/{id}', [GlobalController::class, 'envoieReponse'])->na
 Route::post('responseChauffeur', [GlobalController::class, 'responseChauffeur'])->name('responseChauffeur');
 Route::get('maintenant/{id}', [GlobalController::class, 'maintenant'])->name('maintenant');
 Route::post('prevenirPassager', [GlobalController::class, 'prevenirPassager'])->name('prevenirPassager');
+Route::get('refus/{id}', [GlobalController::class, 'refus'])->name('refus');
+Route::get('supprimer/{id}', [GlobalController::class, 'supprimer'])->name('supprimer');

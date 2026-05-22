@@ -54,6 +54,12 @@
               </li>
             @endif
             
+            @if (isset($histo) && !empty($histo))
+
+            <li class="nav-item"><a href="{{ route('historique') }}" class="nav-link">Historique</a></li>
+              {{-- <h1>Vous avez du historique</h1> --}}
+            @endif
+
             
           @endauth
           

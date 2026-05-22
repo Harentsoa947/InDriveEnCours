@@ -17,7 +17,7 @@
                         <th>Départ</th>
                         <th>Déstination</th>
                         <th>Distance du trajet</th>
-                        <th>État du trajet</th>
+                        {{-- <th>État du trajet</th> --}}
                         <th>Réponse du chauffeur</th>
                         <th>Action</th>
                     </thead>
@@ -29,14 +29,15 @@
                                 <td>{{ $t->trajet->depart }}</td>
                                 <td>{{ $t->trajet->destination }}</td>
                                 <td>{{ $t->trajet->kilometre }} KM</td>
-                                <td>{{ $t->trajet->status }}</td>
+                                {{-- <td>{{ $t->trajet->status }}</td> --}}
                                 <td>
                                     @if ($t->reponse_chauffeur === true)
                                         <p style="background: green;" class="text-center text-white py-2">Demande acceptée</p>
                                     @elseif ($t->prix_chauffeur != null)
-                                    <p style="background: rgb(17, 0, 255);" class="text-center text-white py-2 px-1">{{ $t->prix_chauffeur }} Ar</p>
+                                        <p style="background: rgb(17, 0, 255);" class="text-center text-white py-2 px-1">{{ $t->prix_chauffeur }} Ar</p>
+                                    @elseif ($t->reponse_chauffeur === false)
+                                        <p style="background: red;" class="text-center text-white py-2">Demande refuser</p>
                                     @else
-                                        {{-- Refys --}}
                                         <p>En attente...</p>
                                     @endif
                                 </td>
@@ -46,11 +47,16 @@
                                             <input type="hidden" name="idTrajet" value="{{ $t->trajet->id }}">
                                             <input type="hidden" name="chauffeur" value="{{ $t->chauffeur->id }}">
                                             <input type="submit" value="Choisir" class="btn btn-primary">
-                                            <a href="" class="btn btn-danger">Refuser</a>
+                                            <a href="{{ route('supprimer', [$t->id]) }}" class="btn btn-danger">Supprimer</a>
                                         </form>
                                     @elseif ($t->prix_chauffeur != null)
                                         <input type="submit" value="Accepter prix" class="btn btn-primary">
-                                        <a href="" class="btn btn-danger">Refuser</a>
+                                        <a href="{{ route('supprimer', [$t->id]) }}" class="btn btn-danger">Refuser</a>
+                                    @elseif ($t->reponse_chauffeur === false)
+                                        <a href="{{ route('supprimer', [$t->id]) }}" class="btn btn-danger">Supprimer</a>
+                                    @else
+                                        <a href="{{ route('supprimer', [$t->id]) }}" class="btn btn-secondary">Annuler</a>
+                                    
                                     @endif
                                 </td>
                             </tr>

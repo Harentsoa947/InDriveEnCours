@@ -22,7 +22,14 @@ class GlobalController extends Controller
         $trip1 = null;
         $who = null;
         $message = null;
+        $histo = null;
         if(Auth::check() && auth()->user()->role == 'Chauffeur'){
+            $histo = Trip::where([
+                ['status', 'EndTrajet'],
+                ['driver_id', auth()->user()->id]
+            ])->get();
+            
+
             $trip1 = Trip::where('driver_id', auth()->user()->id)
                 ->whereNotIn('status', ['pending', 'Fini'])
                 ->latest()->first();
@@ -40,7 +47,13 @@ class GlobalController extends Controller
                 $message = 'Allez ici si le trajet est fini';
             }
         }
+             
         if(Auth::check() && auth()->user()->role == 'Passager'){
+            $histo = Trip::where([
+                ['status', 'EndTrajet'],
+                ['user_id', auth()->user()->id]
+            ])->get();
+
             // $trip = Trip::where([
             //     ['user_id', auth()->user()->id], 
             //     ['status', 'planifier']
@@ -48,10 +61,36 @@ class GlobalController extends Controller
             $trip1 = Trip::where('user_id', auth()->user()->id)->latest()->first();
             $who = 'pass';
         }
+
         return view('accueil', [
             'trip1' => $trip1,
             'who' => $who,
-            'message' => $message
+            'message' => $message,
+            'histo' => $histo
+        ]);
+    }
+
+    public function historique()
+    {
+        if(Auth::check() && auth()->user()->role == 'Chauffeur'){
+            $histo = Trip::where([
+                ['status', 'EndTrajet'],
+                ['driver_id', auth()->user()->id]
+            ])->with('user')->get();
+            $role = 'ch';
+        }
+        
+        if(Auth::check() && auth()->user()->role == 'Passager'){
+            $histo = Trip::where([
+                ['status', 'EndTrajet'],
+                ['user_id', auth()->user()->id]
+            ])->with('driver')->get();
+            $role = 'pa';
+        }     
+
+        return view('historique', [
+            'histo' => $histo,
+            'role' => $role
         ]);
     }
 
@@ -334,6 +373,21 @@ class GlobalController extends Controller
         }
 
         return redirect()->route('accueil')->with('successTrajet', 'Attendez votre chauffeur');
+    }
+
+    public function refus($id)
+    {
+        $nonRequete = RequetTrip::find($id);
+        $nonRequete->reponse_chauffeur = false;
+        $nonRequete->save();
+        return redirect()->route('afficher_trajet');
+    }
+
+    public function supprimer($id)
+    {
+        $sup = RequetTrip::find($id);
+        $sup->delete();
+        return redirect()->route('trajet');
     }
 
 }

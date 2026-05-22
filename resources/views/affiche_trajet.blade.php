@@ -58,7 +58,7 @@
                         
                         <td>
                             {{-- @dd($request_chauffeur) --}}
-                            @if ($t->reponse_chauffeur === true)
+                            @if ($t->reponse_chauffeur === true || $t->prix_chauffeur != null)
                                 <p style="background: grey" class="text-white p-2">En Attente réponse passager...</p>
                             @elseif($t->reponse_chauffeur === false)
                                 <p style="background: red" class="text-white p-2">Refuser</p>
@@ -67,7 +67,7 @@
                                     <i class="fa-solid fa-eye"></i>
                                     Voir
                                 </a><br>
-                                <a href="" class="btn btn-danger mt-3">
+                                <a href="{{ route('refus', [$t->id]) }}" class="btn btn-danger mt-3">
                                     <i class="fa-solid fa-x"></i>
                                     Refuser
                                 </a>
